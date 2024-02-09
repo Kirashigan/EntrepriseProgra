@@ -3,11 +3,13 @@ package Package;
 import java.util.*;
 
 public class Discipline {
-    private String nom;
-    private String description;
-    private List<Projet> projet=new ArrayList<>();
+    protected int idDiscipline;
+    protected String nom;
+    protected String description;
+    protected Projet projet;
 
-    public Discipline(String nom, String description) {
+    public Discipline(int idDiscipline,String nom, String description) {
+        this.idDiscipline = idDiscipline;
         this.nom = nom;
         this.description = description;
     }
@@ -28,15 +30,11 @@ public class Discipline {
         this.description = description;
     }
 
-    public List<Projet> getProjet() {
+    public Projet getProjet() {
         return projet;
     }
 
-    public void setProjet(List<Projet> projet) {
+    public void setProjet(Projet projet) {
         this.projet = projet;
     }
-
-
-
-
 }

@@ -1,16 +1,19 @@
 package Package;
 
+import java.math.*;
 import java.util.*;
 
 public class Projet {
+    protected int idProjet;
 
-    private String nom;
-    private Date dateDebut;
-    private Date dateFin;
-    private double cout;
-    private List<Discipline> disci = new ArrayList<>();
-    private List<Travail> tra = new ArrayList<>();
-    public Projet(String nom, Date dateDebut, Date dateFin, double cout) {
+    protected String nom;
+    protected Date dateDebut;
+    protected Date dateFin;
+    protected BigDecimal cout;
+    protected List<Discipline> disci = new ArrayList<>();
+    protected List<Travail> tra = new ArrayList<>();
+    public Projet(int idProjet, String nom, Date dateDebut, Date dateFin, BigDecimal cout) {
+        this.idProjet = idProjet;
         this.nom = nom;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
@@ -41,13 +44,6 @@ public class Projet {
         this.dateFin = dateFin;
     }
 
-    public double getCout() {
-        return cout;
-    }
-
-    public void setCout(double cout) {
-        this.cout = cout;
-    }
 
     public List<Discipline> getDisci() {
         return disci;
@@ -55,6 +51,11 @@ public class Projet {
 
     public void setDisci(List<Discipline> disci) {
         this.disci = disci;
+    }
+
+
+    private void addEmploye(Employe e,Travail pourcentage, Projet dateDebut){
+
     }
 
 

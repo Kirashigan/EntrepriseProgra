@@ -2,13 +2,15 @@ package Package;
 
 public class Competence {
 
-    private int niveau;
-    private Employe e;
+    protected int idCompetence;
+    protected int niveau;
+    protected Discipline d;
 
 
-    public Competence(int niveau, Employe e) {
+    public Competence(int idCompetence,int niveau, Discipline d) {
+        this.idCompetence = idCompetence;
         this.niveau = niveau;
-        this.e = e;
+        this.d = d;
     }
 
     public Competence(int niveau) {
@@ -23,15 +25,19 @@ public class Competence {
         this.niveau = niveau;
     }
 
-    public Employe getE() {
-        return e;
+    public int getIdCompetence() {
+        return idCompetence;
     }
 
-    public void setE(Employe e) {
-        this.e = e;
+    public void setIdCompetence(int idCompetence) {
+        this.idCompetence = idCompetence;
     }
 
+    public Discipline getDiscipline() {
+        return d;
+    }
 
-
-
+    public void setDiscipline(Discipline d) {
+        this.d = d;
+    }
 }

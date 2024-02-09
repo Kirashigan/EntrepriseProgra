@@ -4,13 +4,16 @@ import java.util.*;
 
 public class Employe{
 
-    private String matricule;
-    private String nom;
-    private String prenom;
-    private String tel;
-    private String mail;
-    private List<Competence>c = new ArrayList<>();
-    public Employe(String matricule, String nom, String prenom, String tel, String mail) {
+    protected int idEmploye;
+    protected String matricule;
+    protected String nom;
+    protected String prenom;
+    protected String tel;
+    protected String mail;
+    protected List<Competence>c = new ArrayList<>();
+    protected DisciplineEtNiveau disEtNiv;
+    public Employe(int idEmploye,String matricule, String nom, String prenom, String tel, String mail) {
+        this.idEmploye = idEmploye;
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
@@ -67,6 +70,15 @@ public class Employe{
     }
 
 
+    private void listeDisciplinesEtNiveau(){
+        List<Integer> Niveau = null;
+        List<Discipline> Discipline = null;
+        for(Competence com : c){
+            Niveau.add(com.getNiveau());
+            Discipline.add(com.getDiscipline());
+        }
+        disEtNiv.setDisEtNiv(Discipline, Niveau);
+    }
 
 
 }

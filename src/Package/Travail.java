@@ -1,13 +1,16 @@
 package Package;
 
+import java.time.LocalDate;
 import java.util.*;
 public class Travail {
 
-    private int pourcentage;
-    private Date dateEngag;
-    private Projet p;
+    protected int idTravail;
+    protected int pourcentage;
+    protected LocalDate dateEngag;
+    protected Employe e;
 
-    public Travail(int pourcentage, Date dateEngag) {
+    public Travail(int idTravail, int pourcentage, LocalDate dateEngag) {
+        this.idTravail = idTravail;
         this.pourcentage = pourcentage;
         this.dateEngag = dateEngag;
     }
@@ -20,23 +23,27 @@ public class Travail {
         this.pourcentage = pourcentage;
     }
 
-    public Date getDateEngag() {
+    public LocalDate getDateEngag() {
         return dateEngag;
     }
 
-    public void setDateEngag(Date dateEngag) {
+    public void setDateEngag(LocalDate dateEngag) {
         this.dateEngag = dateEngag;
     }
 
-    public Projet getP() {
-        return p;
+    public int getIdTravail() {
+        return idTravail;
     }
 
-    public void setP(Projet p) {
-        this.p = p;
+    public void setIdTravail(int idTravail) {
+        this.idTravail = idTravail;
     }
 
+    public Employe getE() {
+        return e;
+    }
 
-
-
+    public void setE(Employe e) {
+        this.e = e;
+    }
 }
