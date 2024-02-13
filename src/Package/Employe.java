@@ -79,6 +79,12 @@ public class Employe{
         }
         disEtNiv.setDisEtNiv(Discipline, Niveau);
     }
+    private void addDiscipline(Discipline d,Competence co){
+        Competence test = new Competence(co.getNiveau(),d);
+        c.add(test);
+    }
+
+
 
 
 }

@@ -13,6 +13,11 @@ public class Competence {
         this.d = d;
     }
 
+    public Competence(int niveau, Discipline d) {
+        this.niveau = niveau;
+        this.d = d;
+    }
+
     public Competence(int niveau) {
         this.niveau = niveau;
     }
