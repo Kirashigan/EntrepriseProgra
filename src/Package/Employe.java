@@ -20,7 +20,6 @@ public class Employe{
     protected String tel;
     protected String mail;
     protected List<Competence> competenceList = new ArrayList<>();
-    protected List<Competence> niveauEtCompetence= new ArrayList<>();
     public Employe(int idEmploye, String matricule, String nom, String prenom){
         this.idEmploye = idEmploye;
         this.matricule = matricule;
@@ -94,12 +93,7 @@ public class Employe{
 
     */
     public void addDiscipline(Discipline d, int niveau){
-        int c;
         Competence test = new Competence(niveau,d);
-        if(this.competenceList.isEmpty()){
-            c = 0;
-        }else c = this.competenceList.size();
-
         competenceList.add(test);
     }
 

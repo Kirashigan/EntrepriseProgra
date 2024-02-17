@@ -14,6 +14,7 @@ public class Discipline {
     protected int idDiscipline;
     protected String nom;
     protected String description;
+    protected int niveau;
     protected Projet projet;
 
     public Discipline(int idDiscipline,String nom, String description) {

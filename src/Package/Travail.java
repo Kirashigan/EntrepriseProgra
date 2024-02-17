@@ -13,11 +13,16 @@ public class Travail {
 
     protected int idTravail;
     protected int pourcentage;
-    protected LocalDate dateEngag;
+    protected Date dateEngag;
     protected Employe e;
 
-    public Travail(int idTravail, int pourcentage, LocalDate dateEngag) {
+    public Travail(int idTravail, int pourcentage, Date dateEngag) {
         this.idTravail = idTravail;
+        this.pourcentage = pourcentage;
+        this.dateEngag = dateEngag;
+    }
+    public Travail(Employe e,  int pourcentage, Date dateEngag) {
+        this.e= e;
         this.pourcentage = pourcentage;
         this.dateEngag = dateEngag;
     }
@@ -30,11 +35,11 @@ public class Travail {
         this.pourcentage = pourcentage;
     }
 
-    public LocalDate getDateEngag() {
+    public Date getDateEngag() {
         return dateEngag;
     }
 
-    public void setDateEngag(LocalDate dateEngag) {
+    public void setDateEngag(Date dateEngag) {
         this.dateEngag = dateEngag;
     }
 
