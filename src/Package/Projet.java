@@ -2,7 +2,13 @@ package Package;
 
 import java.math.*;
 import java.util.*;
-
+/**
+ * classe Projet
+ *
+ * @author Kirashigan
+ * @version 1.0
+ *
+ */
 public class Projet {
     protected int idProjet;
 
@@ -57,6 +63,7 @@ public class Projet {
     private void addEmploye(Employe e,Travail pourcentage, Projet dateDebut){
 
     }
+
 
 
 

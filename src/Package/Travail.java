@@ -2,6 +2,13 @@ package Package;
 
 import java.time.LocalDate;
 import java.util.*;
+/**
+ * classe Travail
+ *
+ * @author Kirashigan
+ * @version 1.0
+ *
+ */
 public class Travail {
 
     protected int idTravail;

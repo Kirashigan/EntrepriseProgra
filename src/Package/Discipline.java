@@ -2,6 +2,14 @@ package Package;
 
 import java.util.*;
 
+/**
+ * classe Discipline
+ *
+ * @author Kirashigan
+ * @version 1.0
+ *
+ */
+
 public class Discipline {
     protected int idDiscipline;
     protected String nom;

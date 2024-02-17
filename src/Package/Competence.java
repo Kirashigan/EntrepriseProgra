@@ -1,11 +1,25 @@
 package Package;
 
+/**
+ * classe Competence
+ *
+ * @author Kirashigan
+ * @version 1.0
+ *
+ */
+
 public class Competence {
 
     protected int idCompetence;
     protected int niveau;
     protected Discipline d;
 
+
+    /*
+    * Exemple: id = 1 Java
+    * id = 2 C
+    * id = 3 Python
+    */
 
     public Competence(int idCompetence,int niveau, Discipline d) {
         this.idCompetence = idCompetence;

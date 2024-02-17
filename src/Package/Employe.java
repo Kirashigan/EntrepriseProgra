@@ -2,6 +2,15 @@ package Package;
 
 import java.util.*;
 
+/**
+ * classe Employe
+ *
+ * @author Kirashigan
+ * @version 1.0
+ *
+ */
+
+
 public class Employe{
 
     protected int idEmploye;
@@ -10,8 +19,14 @@ public class Employe{
     protected String prenom;
     protected String tel;
     protected String mail;
-    protected List<Competence>c = new ArrayList<>();
-    protected DisciplineEtNiveau disEtNiv;
+    protected List<Competence> competenceList = new ArrayList<>();
+    protected List<Competence> niveauEtCompetence= new ArrayList<>();
+    public Employe(int idEmploye, String matricule, String nom, String prenom){
+        this.idEmploye = idEmploye;
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+    }
     public Employe(int idEmploye,String matricule, String nom, String prenom, String tel, String mail) {
         this.idEmploye = idEmploye;
         this.matricule = matricule;
@@ -62,26 +77,51 @@ public class Employe{
     }
 
     public List<Competence> getC() {
-        return c;
+        return competenceList;
     }
 
     public void setC(List<Competence> c) {
-        this.c = c;
+        this.competenceList = c;
     }
 
 
-    private void listeDisciplinesEtNiveau(){
-        List<Integer> Niveau = null;
-        List<Discipline> Discipline = null;
-        for(Competence com : c){
-            Niveau.add(com.getNiveau());
-            Discipline.add(com.getDiscipline());
+    /*
+    le niveau allant de 1 à 10
+
+    int niveau ==> Java 1
+    int niveau ==> C++ 2
+
+
+    */
+    public void addDiscipline(Discipline d, int niveau){
+        int c;
+        Competence test = new Competence(niveau,d);
+        if(this.competenceList.isEmpty()){
+            c = 0;
+        }else c = this.competenceList.size();
+
+        competenceList.add(test);
+    }
+
+    public List<Competence> disciplineEtNiveau(){
+        return this.competenceList;
+    }
+
+    public void modifDiscipline(Discipline d, int niveau) {
+        for (int i = 0; i < this.disciplineEtNiveau().size(); i++) {
+            if (this.disciplineEtNiveau().get(i).getDiscipline().equals(d)) {
+                this.competenceList.get(i).setNiveau(niveau);
+            }
         }
-        disEtNiv.setDisEtNiv(Discipline, Niveau);
     }
-    private void addDiscipline(Discipline d,Competence co){
-        Competence test = new Competence(co.getNiveau(),d);
-        c.add(test);
+
+        public void suppDiscipline(Discipline d){
+            for (int i = 0; i < this.disciplineEtNiveau().size(); i++) {
+                if(this.disciplineEtNiveau().get(i).getDiscipline().equals(d)){
+                    this.competenceList.remove(i);
+                }
+            }
+
     }
 
 
