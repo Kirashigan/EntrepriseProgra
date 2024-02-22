@@ -9,18 +9,26 @@ package Package;
  */
 
 public class Competence {
-
+    /**
+     * identifiant unique des compétences
+     */
     protected int idCompetence;
+    /**
+     * niveau qu'une compétence d'un employé
+     */
     protected int niveau;
+    /**
+     * discipline de l'employé
+     */
     protected Discipline d;
 
 
-    /*
-    * Exemple: id = 1 Java
-    * id = 2 C
-    * id = 3 Python
-    */
-
+    /**
+     * Permet d'ajouter une compétence avec ses parametres
+     * @param idCompetence
+     * @param niveau
+     * @param d <== discipline
+     */
     public Competence(int idCompetence,int niveau, Discipline d) {
         this.idCompetence = idCompetence;
         this.niveau = niveau;
@@ -36,26 +44,50 @@ public class Competence {
         this.niveau = niveau;
     }
 
+    /**
+     * Retourne le niveau d'une compétence
+     * @return
+     */
     public int getNiveau() {
         return niveau;
     }
 
+    /**
+     * Permet de changer le niveau d'une compétence
+     * @param niveau
+     */
     public void setNiveau(int niveau) {
         this.niveau = niveau;
     }
 
+    /**
+     * Retourne id d'une compétence
+     * @return
+     */
     public int getIdCompetence() {
         return idCompetence;
     }
 
+    /**
+     * Permet de changer l'id d'une compétence
+      * @param idCompetence
+     */
     public void setIdCompetence(int idCompetence) {
         this.idCompetence = idCompetence;
     }
 
+    /**
+     * Retourne une discipline
+     * @return
+     */
     public Discipline getDiscipline() {
         return d;
     }
 
+    /**
+     * permet de changer le discipline
+     * @param d
+     */
     public void setDiscipline(Discipline d) {
         this.d = d;
     }

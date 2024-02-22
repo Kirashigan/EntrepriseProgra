@@ -51,13 +51,14 @@ public class Main {
 */
 
 
-/*
+
 //Suppression OK
         employe1.suppDiscipline(discipline1);
+        employe1.suppDiscipline(discipline3);
         for (int i = 0; i < employe1.disciplineEtNiveau().size(); i++) {
             System.out.println((i+1)+" Discipline: "+employe1.disciplineEtNiveau().get(i).getDiscipline().getNom()+ "\nNiveau: " + employe1.disciplineEtNiveau().get(i).getNiveau());
         }
-*/
+
 
         /*
         ========================================================
