@@ -231,8 +231,10 @@ public class Projet {
         return pour;
     }
 
-    /*
-    Retourner une liste d'employé, niveau supp au niveau du projet
+    /**
+     * Me permet de retourner une liste d'employé qui sont plus qualifié que les employés déjà sur le projet.
+     * @param niveau
+     * @return
      */
     public List<Employe> listeEmployesDisciplineBase(int niveau) {
         List<Employe> listeplusqualifie = new ArrayList<>();
