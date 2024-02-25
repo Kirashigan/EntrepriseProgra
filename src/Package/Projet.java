@@ -11,9 +11,13 @@ import java.util.*;
  */
 public class Projet {
     /**
+     * Permet d'incrémenter l'identifiant automatiquement
+     */
+    protected static int idIncrementation = 1;
+    /**
      * Identifiant unique d'un projet
      */
-    protected int idProjet;
+    protected  int idProjet;
     /**
      * Nom du projet
      */
@@ -41,15 +45,15 @@ public class Projet {
 
     /**
      * Permet d'ajouter un projet avec tous ses parametres
+     * auto-incrémentation
      *
-     * @param idProjet Identifient du projet
      * @param nom Nom du projet
      * @param dateDebut Date de début de projet
      * @param dateFin Date de fin de projet
      * @param cout Cout du projet
      */
-    public Projet(int idProjet, String nom, Date dateDebut, Date dateFin, BigDecimal cout) {
-        this.idProjet = idProjet;
+    public Projet(String nom, Date dateDebut, Date dateFin, BigDecimal cout) {
+        this.idProjet = idIncrementation++;
         this.nom = nom;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
@@ -214,6 +218,44 @@ public class Projet {
             }
         }
         return listeplusqualifie;
+    }
+    /**
+     * Indique si un autre objet est "égal" à celui-ci.
+     * La méthode compare cet objet à un autre objet spécifié.
+     *
+     * @param o l'objet à comparer avec cet objet.
+     * @return {@code true} si les objets sont égaux ; {@code false} sinon.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Projet projet = (Projet) o;
+        return idProjet == projet.idProjet;
+    }
+    /**
+     * Retourne un code de hachage pour l'objet.
+     * @return le code de hachage de l'objet.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idProjet);
+    }
+
+    /**
+     * Retourne une représentation sous forme de texte de la classe Projet
+     * @return Une chaîne de caractères représentant cet objet.
+     */
+    @Override
+    public String toString() {
+        return "Projet :" +
+                "\nidProjet : " + idProjet +
+                "\nnom :'" + nom + '\'' +
+                "\ndateDebut : " + dateDebut +
+                "\ndateFin : " + dateFin +
+                "\ncout : " + cout +
+                "\ndiscipline : " + discipline +
+                "\ntravailList : " + travailList.toString();
     }
 }
 

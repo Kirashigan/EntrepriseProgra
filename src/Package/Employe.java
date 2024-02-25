@@ -13,6 +13,10 @@ import java.util.*;
 
 public class Employe{
     /**
+     * Permet d'incrémenter l'identifiant automatiquement
+     */
+    protected static int idIncrementation = 1;
+    /**
      * Identifiant unique de l'employé
      */
     protected int idEmploye;
@@ -43,13 +47,13 @@ public class Employe{
 
     /**
      * Permet d'ajouter un employé avec tous ses parametres
-     * @param idEmploye identifiant unique
+     * identifiant unique et auto incrémenté
      * @param matricule matricule de l'employé
      * @param nom nom de l'employé
      * @param prenom prenom de l'employé
      */
-    public Employe(int idEmploye, String matricule, String nom, String prenom){
-        this.idEmploye = idEmploye;
+    public Employe(String matricule, String nom, String prenom){
+        this.idEmploye = idIncrementation++;
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
@@ -57,20 +61,28 @@ public class Employe{
 
     /**
      * Permet d'ajouter un employé avec des parametres supplémentaire
-     * @param idEmploye identifiant unique de l'employé
+     * identifiant unique de l'employé
      * @param matricule matricule de l'employé
      * @param nom nom de l'employé
      * @param prenom prenom de l'employé
      * @param telephone numéro de téléphone de l'employé
      * @param adresseMail adresse mail de l'employé
      */
-    public Employe(int idEmploye,String matricule, String nom, String prenom, String telephone, String adresseMail) {
-        this.idEmploye = idEmploye;
+    public Employe(String matricule, String nom, String prenom, String telephone, String adresseMail) {
+        this.idEmploye = idIncrementation++;
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
         this.telephone = telephone;
         this.adresseMail = adresseMail;
+    }
+
+    /**
+     *
+      * @return retourne l'identifiant de l'employé
+     */
+    public int getIdEmploye() {
+        return idEmploye;
     }
 
     /**
@@ -205,8 +217,42 @@ public class Employe{
             System.out.println("Aucune discipline de ce nom n'a été répertoriée");
 
         }
+    /**
+     * Indique si un autre objet est "égal" à celui-ci.
+     * La méthode compare cet objet à un autre objet spécifié.
+     *
+     * @param o l'objet à comparer avec cet objet.
+     * @return {@code true} si les objets sont égaux ; {@code false} sinon.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employe employe = (Employe) o;
+        return idEmploye == employe.idEmploye;
+    }
+    /**
+     * Retourne un code de hachage pour l'objet.
+     * @return le code de hachage de l'objet.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idEmploye);
+    }
 
-
-
-
+    /**
+     * Retourne une représentation sous forme de texte de la classe Employé
+     * @return Une chaîne de caractères représentant cet objet.
+     */
+    @Override
+    public String toString() {
+        return "Employe: " +
+                "\nidEmploye: " + idEmploye +
+                "\nmatricule: '" + matricule + '\'' +
+                "\nnom: '" + nom + '\'' +
+                "\nprenom: '" + prenom + '\'' +
+                "\ntelephone: '" + telephone + '\'' +
+                "\nadresseMail: '" + adresseMail + '\'' +
+                "\ncompetenceList: " + competenceList.toString();
+    }
 }

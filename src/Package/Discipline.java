@@ -12,6 +12,10 @@ import java.util.*;
 
 public class Discipline {
     /**
+     * Permet d'incrémenter l'identifiant automatiquement
+     */
+    protected static int idIncrementation = 1;
+    /**
      * identifiant unique de la discipline
      */
     protected int idDiscipline;
@@ -29,15 +33,21 @@ public class Discipline {
     protected List<Projet>projet=new ArrayList<>();
 
     /**
-     * Permet l'ajout d'une discipline avec ses parametres
-     * @param idDiscipline identifiant de la discipline (Unique)
+     * Permet l'ajout d'une discipline avec ses parametres avec auto incrémentation de l'identifiant
      * @param nom Nom de la discipline
      * @param description Description de la discipline
      */
-    public Discipline(int idDiscipline,String nom, String description) {
-        this.idDiscipline = idDiscipline;
+    public Discipline(String nom, String description) {
+        this.idDiscipline = idIncrementation++;
         this.nom = nom;
         this.description = description;
+    }
+
+    /**
+     * @return Retourne l'Identifiant de la discipline
+     */
+    public int getIdDiscipline() {
+        return idDiscipline;
     }
 
     /**
@@ -79,5 +89,42 @@ public class Discipline {
      */
     public void setProjet(List<Projet> projet) {
         this.projet = projet;
+    }
+
+    /**
+     * Retourne un code de hachage pour l'objet.
+     * @return le code de hachage de l'objet.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idDiscipline);
+    }
+
+    /**
+     * Indique si un autre objet est "égal" à celui-ci.
+     * La méthode compare cet objet à un autre objet spécifié.
+     *
+     * @param o l'objet à comparer avec cet objet.
+     * @return {@code true} si les objets sont égaux ; {@code false} sinon.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Discipline that = (Discipline) o;
+        return idDiscipline == that.idDiscipline;
+    }
+
+    /**
+     * Retourne une représentation sous forme de texte de la classe Discipline
+     * @return Une chaîne de caractères représentant cet objet.
+     */
+    @Override
+    public String toString() {
+        return "Discipline: " +
+                "\nidDiscipline=" + idDiscipline +
+                "\nnom='" + nom + '\'' +
+                "\ndescription='" + description + '\'' +
+                "\nprojet=" + projet ;
     }
 }

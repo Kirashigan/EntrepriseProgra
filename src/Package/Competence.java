@@ -1,5 +1,7 @@
 package Package;
 
+import java.util.Objects;
+
 /**
  * Classe Competence
  *
@@ -84,5 +86,39 @@ public class Competence {
      */
     public void setDiscipline(Discipline discipline) {
         this.discipline = discipline;
+    }
+    /**
+     * Indique si un autre objet est "égal" à celui-ci.
+     * La méthode compare cet objet à un autre objet spécifié.
+     *
+     * @param o l'objet à comparer avec cet objet.
+     * @return {@code true} si les objets sont égaux ; {@code false} sinon.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Competence that = (Competence) o;
+        return idCompetence == that.idCompetence;
+    }
+    /**
+     * Retourne un code de hachage pour l'objet.
+     * @return le code de hachage de l'objet.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCompetence);
+    }
+
+    /**
+     * Retourne une représentation sous forme de texte de la classe Competence
+     * @return Une chaîne de caractères représentant cet objet.
+     */
+    @Override
+    public String toString() {
+        return "Competence:" +
+                "\nidCompetence: " + idCompetence +
+                "\nniveau: " + niveau +
+                "\ndiscipline: " + discipline;
     }
 }
