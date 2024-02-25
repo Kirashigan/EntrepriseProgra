@@ -12,6 +12,10 @@ import java.util.Objects;
 
 public class Competence {
     /**
+     * Permet d'incrémenter l'identifiant automatiquement
+     */
+    protected static int idIncrementation = 1;
+    /**
      * Identifiant unique des compétences
      */
     protected int idCompetence;
@@ -27,20 +31,16 @@ public class Competence {
 
     /**
      * Permet d'ajouter une compétence avec ses parametres
-     * @param idCompetence Identifiant de la compétence (Unique)
+     * auto incrementation avec idIncrementation
      * @param niveau Le niveau requit par la compétence
      * @param discipline La discipline sur laquelle la compétence repose
      */
-    public Competence(int idCompetence,int niveau, Discipline discipline) {
-        this.idCompetence = idCompetence;
+    public Competence(int niveau, Discipline discipline) {
+        this.idCompetence = idIncrementation++;
         this.niveau = niveau;
         this.discipline = discipline;
     }
 
-    public Competence(int niveau, Discipline discipline) {
-        this.niveau = niveau;
-        this.discipline = discipline;
-    }
 
     public Competence(int niveau) {
         this.niveau = niveau;

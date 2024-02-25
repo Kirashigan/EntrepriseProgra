@@ -11,6 +11,10 @@ import java.util.*;
  */
 public class Travail {
     /**
+     * Permet d'incrémenter l'identifiant automatiquement
+     */
+    protected static int idIncrementation = 1;
+    /**
      * identifiant d'un travail
      */
 
@@ -30,12 +34,12 @@ public class Travail {
 
     /**
      * Permet d'ajouter un travail avec ses parametres
-     * @param idTravail unique
+     * auto incrémentation avec idIncrementation
      * @param pourcentage implication dans le travail
      * @param dateEngag date d'engagement dans le travail
      */
-    public Travail(int idTravail, int pourcentage, Date dateEngag) {
-        this.idTravail = idTravail;
+    public Travail(int pourcentage, Date dateEngag) {
+        this.idTravail = idIncrementation++;
         this.pourcentage = pourcentage;
         this.dateEngag = dateEngag;
     }
