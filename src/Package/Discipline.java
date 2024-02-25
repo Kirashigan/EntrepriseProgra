@@ -123,8 +123,8 @@ public class Discipline {
     public String toString() {
         return "Discipline: " +
                 "\nidDiscipline=" + idDiscipline +
-                "\nnom='" + nom + '\'' +
-                "\ndescription='" + description + '\'' +
+                "\nnom='" + nom +
+                "\ndescription='" + description +
                 "\nprojet=" + projet ;
     }
 }

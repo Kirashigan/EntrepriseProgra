@@ -250,7 +250,7 @@ public class Projet {
     public String toString() {
         return "Projet :" +
                 "\nidProjet : " + idProjet +
-                "\nnom :'" + nom + '\'' +
+                "\nnom :'" + nom +
                 "\ndateDebut : " + dateDebut +
                 "\ndateFin : " + dateFin +
                 "\ncout : " + cout +

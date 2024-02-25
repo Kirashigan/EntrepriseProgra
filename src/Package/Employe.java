@@ -248,11 +248,11 @@ public class Employe{
     public String toString() {
         return "Employe: " +
                 "\nidEmploye: " + idEmploye +
-                "\nmatricule: '" + matricule + '\'' +
-                "\nnom: '" + nom + '\'' +
-                "\nprenom: '" + prenom + '\'' +
-                "\ntelephone: '" + telephone + '\'' +
-                "\nadresseMail: '" + adresseMail + '\'' +
+                "\nmatricule: '" + matricule +
+                "\nnom: '" + nom +
+                "\nprenom: '" + prenom +
+                "\ntelephone: '" + telephone +
+                "\nadresseMail: '" + adresseMail +
                 "\ncompetenceList: " + competenceList.toString();
     }
 }
