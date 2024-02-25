@@ -157,16 +157,16 @@ public class Employe{
      * Permet de retourner une liste de compétence
      * @return competenceList
      */
-    public List<Competence> getC() {
+    public List<Competence> getCompetenceList() {
         return competenceList;
     }
 
     /**
      * Permet de changer une liste de competence
-     * @param c
+     * @param competenceList
      */
-    public void setC(List<Competence> c) {
-        this.competenceList = c;
+    public void setCompetenceList(List<Competence> competenceList) {
+        this.competenceList = competenceList;
     }
 
 
@@ -195,9 +195,9 @@ public class Employe{
      * @param niveau
      */
     public void modifDiscipline(Discipline d, int niveau) {
-        for (int i = 0; i < this.disciplineEtNiveau().size(); i++) {
-            if (this.disciplineEtNiveau().get(i).getDiscipline().equals(d)) {
-                this.competenceList.get(i).setNiveau(niveau);
+        for (Competence c : competenceList){
+            if(c.getDiscipline().equals(d)){
+                c.setNiveau(niveau);
                 return;
             }
         }
@@ -209,10 +209,10 @@ public class Employe{
      * @param d
      */
         public void suppDiscipline(Discipline d){
-            for (int i = 0; i < this.disciplineEtNiveau().size(); i++) {
-                if(this.disciplineEtNiveau().get(i).getDiscipline().equals(d)){
-                    this.competenceList.remove(i);
-                    return; //permet de sortir directement de la boucle for
+            for (Competence c : competenceList){
+                if(c.getDiscipline().equals(d)){
+                    competenceList.remove(c);
+                    return;
                 }
             }
             System.out.println("Aucune discipline de ce nom n'a été répertoriée");

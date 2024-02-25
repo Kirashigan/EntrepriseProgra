@@ -31,9 +31,9 @@ public class Projet {
      */
     protected BigDecimal cout;
     /**
-     * Liste de discipline d'un projet
+     * Discipline de base du projet
      */
-    protected List<Discipline> disciplineList = new ArrayList<>();
+    protected Discipline discipline;
     /**
      * Liste de travail d'un travail
      */
@@ -129,21 +129,19 @@ public class Projet {
     }
 
     /**
-     * Retourne la liste de discipline utilisé dans un projet
-     *
+     * retourne la discipline du projet
      * @return
      */
-    public List<Discipline> getDisciplineList() {
-        return disciplineList;
+    public Discipline getDiscipline() {
+        return discipline;
     }
 
     /**
-     * Permet de changer une liste de discipline d'un projet
-     *
-     * @param disciplineList
+     * Permet de changer la discipline du projet
+     * @param discipline
      */
-    public void setDisciplineList(List<Discipline> disciplineList) {
-        this.disciplineList = disciplineList;
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
     }
 
     /**
@@ -240,7 +238,7 @@ public class Projet {
         List<Employe> listeplusqualifie = new ArrayList<>();
         for (int i = 0; i < travailList.size(); i++) {
             for (int j = 0; j < travailList.get(i).getE().competenceList.size(); j++) {
-                if(travailList.get(i).getE().competenceList.get(j).getNiveau()>niveau){
+                if(travailList.get(i).getE().competenceList.get(j).getNiveau()>niveau && travailList.get(i).getE().competenceList.get(j).getDiscipline().equals(this.discipline)){
                     listeplusqualifie.add(travailList.get(i).getE());
                 }
             }

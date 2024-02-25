@@ -35,7 +35,7 @@ public class Main {
         employe1.addDiscipline(discipline1,2);
         employe1.addDiscipline(discipline2,10);
         employe2.addDiscipline(discipline2, 5);
-/*
+
         for (int i = 0; i < employe1.disciplineEtNiveau().size(); i++) {
             System.out.println((i+1)+" Discipline: "+employe1.disciplineEtNiveau().get(i).getDiscipline().getNom()+ "\nNiveau: " + employe1.disciplineEtNiveau().get(i).getNiveau());
         }
@@ -48,7 +48,7 @@ public class Main {
         for (int i = 0; i < employe1.disciplineEtNiveau().size(); i++) {
             System.out.println((i+1)+" Discipline: "+employe1.disciplineEtNiveau().get(i).getDiscipline().getNom()+ "\nNiveau: " + employe1.disciplineEtNiveau().get(i).getNiveau());
         }
-*/
+
 
 
 
