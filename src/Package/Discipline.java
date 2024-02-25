@@ -30,9 +30,9 @@ public class Discipline {
 
     /**
      * Permet l'ajout d'une discipline avec ses parametres
-     * @param idDiscipline
-     * @param nom
-     * @param description
+     * @param idDiscipline identifiant de la discipline (Unique)
+     * @param nom Nom de la discipline
+     * @param description Description de la discipline
      */
     public Discipline(int idDiscipline,String nom, String description) {
         this.idDiscipline = idDiscipline;
@@ -41,47 +41,41 @@ public class Discipline {
     }
 
     /**
-     * Retourne le nom
-     * @return
+     * @return Retourne le nom
      */
     public String getNom() {
         return nom;
     }
     /**
-     * Changer le nom
-     * @param nom
+     * @param nom Changer le nom
      */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
     /**
-     * Retourne la description
-     * @return
+     * @return Retourne la description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Change la description
-     * @param description
+     * @param description Change la description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * Retourne une liste de projet
-     * @return
+     * @return Retourne une liste de projet
      */
     public List<Projet> getProjet() {
         return projet;
     }
 
     /**
-     * Change la liste de projet
-     * @param projet
+     * @param projet Change la liste de projet
      */
     public void setProjet(List<Projet> projet) {
         this.projet = projet;

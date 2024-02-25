@@ -4,18 +4,18 @@ import java.math.*;
 import java.util.*;
 
 /**
- * classe Projet
+ * Classe Projet
  *
  * @author Kirashigan
  * @version 1.0
  */
 public class Projet {
     /**
-     * identifiant unique d'un projet
+     * Identifiant unique d'un projet
      */
     protected int idProjet;
     /**
-     * nom du projet
+     * Nom du projet
      */
     protected String nom;
     /**
@@ -40,13 +40,13 @@ public class Projet {
     protected List<Travail> travailList = new ArrayList<>();
 
     /**
-     * Permet d'ajouter un projet avec tout ses parametres
+     * Permet d'ajouter un projet avec tous ses parametres
      *
-     * @param idProjet
-     * @param nom
-     * @param dateDebut
-     * @param dateFin
-     * @param cout
+     * @param idProjet Identifient du projet
+     * @param nom Nom du projet
+     * @param dateDebut Date de début de projet
+     * @param dateFin Date de fin de projet
+     * @param cout Cout du projet
      */
     public Projet(int idProjet, String nom, Date dateDebut, Date dateFin, BigDecimal cout) {
         this.idProjet = idProjet;
@@ -57,169 +57,140 @@ public class Projet {
     }
 
     /**
-     * Retourne le nom du projet
-     *
-     * @return
+     * @return  Retourne le nom du projet
      */
     public String getNom() {
         return nom;
     }
 
     /**
-     * Change le nom du projet
-     *
-     * @param nom
+     * @param nom  Change le nom du projet
      */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
     /**
-     * Retourne la date de début du projet
-     *
-     * @return
+     * @return  Retourne la date de début du projet
      */
     public Date getDateDebut() {
         return dateDebut;
     }
 
     /**
-     * change la date de début du projet
-     *
-     * @param dateDebut
+     * @param dateDebut Change la date de début du projet
      */
     public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
 
     /**
-     * Retourne la date de fin de projet
-     *
-     * @return
+     * @return Retourne la date de fin de projet
      */
     public Date getDateFin() {
         return dateFin;
     }
 
     /**
-     * Changer la date de fin du projet
-     *
-     * @param dateFin
+     * @param dateFin Changer la date de fin du projet
      */
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
 
     /**
-     * Retourne le coût du projet
-     *
-     * @return
+     * @return Retourne le coût du projet
      */
     public BigDecimal getCout() {
         return cout;
     }
 
     /**
-     * Changer le coût du projet
-     *
-     * @param cout
+     * @param cout Changer le coût du projet
      */
     public void setCout(BigDecimal cout) {
         this.cout = cout;
     }
 
     /**
-     * retourne la discipline du projet
-     * @return
+     * @return retourne la discipline du projet
      */
     public Discipline getDiscipline() {
         return discipline;
     }
 
     /**
-     * Permet de changer la discipline du projet
-     * @param discipline
+     * @param discipline Permet de changer la discipline du projet
      */
     public void setDiscipline(Discipline discipline) {
         this.discipline = discipline;
     }
 
     /**
-     * Retourne une liste des employés qui travaillent sur le projet
-     *
-     * @return
+     * @return Retourne une liste des employés qui travaillent sur le projet
      */
     public List<Travail> getTravailList() {
         return travailList;
     }
 
     /**
-     * changer une liste d'employés qui travaillent sur un projet
-     *
-     * @param travailList
+     * @param travailList Changer une liste d'employés qui travaillent sur un projet
      */
     public void setTravailList(List<Travail> travailList) {
         this.travailList = travailList;
     }
 
     /**
-     * Ajouter une employé, sa contribution dans le travail et sa date de début sur le projet
+     * Ajouter un employé, sa contribution dans le travail et sa date de début sur le projet
      *
-     * @param e
-     * @param pourcent
-     * @param dateDebut
+     * @param employe l'employé à ajouter
+     * @param pourcent implicaton dans le projet
+     * @param dateDebut date de début dans le projet
      */
-    public void addEmploye(Employe e, int pourcent, Date dateDebut) {
+    public void addEmploye(Employe employe, int pourcent, Date dateDebut) {
         int c;
-        Travail test = new Travail(e, pourcent, dateDebut);
+        Travail test = new Travail(employe, pourcent, dateDebut);
         this.travailList.add(test);
     }
 
     /**
-     * retourne la liste des employés, le pourcentage et la date des projets
-     *
-     * @return
+     * @return Retourne la liste des employés, le pourcentage et la date des projets
      */
     public List<Travail> listeEmployesEtPourcentageEtDate() {
         return this.travailList;
     }
 
     /**
-     * permet de supprimer un employé d'un projet
-     *
-     * @param e
+     * @param employe Permet de supprimer un employé d'un projet
      */
-    public void supEmploye(Employe e) {
+    public void supEmploye(Employe employe) {
         boolean flag = true;
         for (int i = 0; i < this.getTravailList().size(); i++) {
-            if (this.getTravailList().get(i).getE().equals(e)) {
+            if (this.getTravailList().get(i).getEmploye().equals(employe)) {
                 this.getTravailList().remove(i);
                 flag = false;
             }
         }
         if (flag) {
-            System.out.println(e.getPrenom() + " n'a pas été retrouvé dans ce projet.");
+            System.out.println(employe.getPrenom() + " n'a pas été retrouvé dans ce projet.");
         }
     }
 
     /**
      * Permet de changer la contribution d'un employé sur un projet
-     *
-     * @param e
+     * @param employe
      * @param pourcent
      */
-    public void modifEmploye(Employe e, int pourcent) {
+    public void modifEmploye(Employe employe, int pourcent) {
         for (int i = 0; i < this.getTravailList().size(); i++) {
-            if (this.getTravailList().get(i).getE().equals(e)) {
+            if (this.getTravailList().get(i).getEmploye().equals(employe)) {
                 this.getTravailList().get(i).setPourcentage(pourcent);
             }
         }
     }
 
     /**
-     * retourne la contribution total des employés dans un projet.
-     *
-     * @return
+     * @return Retourne la contribution totale des employés dans un projet.
      */
     public int totalPourcentage() {
         int pour = 0;
@@ -230,16 +201,15 @@ public class Projet {
     }
 
     /**
-     * Me permet de retourner une liste d'employé qui sont plus qualifié que les employés déjà sur le projet.
-     * @param niveau
-     * @return
+     * @param niveau niveau minimum recherché dans la discipline voulu parmit tous les employés de la discipline.
+     * @return retourner une liste d'employé qui sont plus qualifié que les employés déjà sur le projet.
      */
     public List<Employe> listeEmployesDisciplineBase(int niveau) {
         List<Employe> listeplusqualifie = new ArrayList<>();
         for (int i = 0; i < travailList.size(); i++) {
-            for (int j = 0; j < travailList.get(i).getE().competenceList.size(); j++) {
-                if(travailList.get(i).getE().competenceList.get(j).getNiveau()>niveau && travailList.get(i).getE().competenceList.get(j).getDiscipline().equals(this.discipline)){
-                    listeplusqualifie.add(travailList.get(i).getE());
+            for (int j = 0; j < travailList.get(i).getEmploye().competenceList.size(); j++) {
+                if(travailList.get(i).getEmploye().competenceList.get(j).getNiveau()>niveau && travailList.get(i).getEmploye().competenceList.get(j).getDiscipline().equals(this.discipline)){
+                    listeplusqualifie.add(travailList.get(i).getEmploye());
                 }
             }
         }

@@ -13,11 +13,11 @@ import java.util.*;
 
 public class Employe{
     /**
-     * identifiant unique de l'employé
+     * Identifiant unique de l'employé
      */
     protected int idEmploye;
     /**
-     * matricule de l'employé
+     * Matricule de l'employé
      */
     protected String matricule;
     /**
@@ -29,20 +29,20 @@ public class Employe{
      */
     protected String prenom;
     /**
-     * numéro de téléphone de l'employé
+     * Numéro de téléphone de l'employé
      */
-    protected String tel;
+    protected String telephone;
     /**
-     * adresse mail de l'employé
+     * Adresse mail de l'employé
      */
-    protected String mail;
+    protected String adresseMail;
     /**
-     * liste des compétences de l'employé
+     * Liste des compétences de l'employé
      */
     protected List<Competence> competenceList = new ArrayList<>();
 
     /**
-     * Permet d'ajouter un employé avec tout ses parametres
+     * Permet d'ajouter un employé avec tous ses parametres
      * @param idEmploye identifiant unique
      * @param matricule matricule de l'employé
      * @param nom nom de l'employé
@@ -56,114 +56,102 @@ public class Employe{
     }
 
     /**
-     * permet d'ajouter un employé avec des parametres supplémentaire
+     * Permet d'ajouter un employé avec des parametres supplémentaire
      * @param idEmploye identifiant unique de l'employé
      * @param matricule matricule de l'employé
      * @param nom nom de l'employé
      * @param prenom prenom de l'employé
-     * @param tel numéro de téléphone de l'employé
-     * @param mail adresse mail de l'employé
+     * @param telephone numéro de téléphone de l'employé
+     * @param adresseMail adresse mail de l'employé
      */
-    public Employe(int idEmploye,String matricule, String nom, String prenom, String tel, String mail) {
+    public Employe(int idEmploye,String matricule, String nom, String prenom, String telephone, String adresseMail) {
         this.idEmploye = idEmploye;
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
-        this.tel = tel;
-        this.mail = mail;
+        this.telephone = telephone;
+        this.adresseMail = adresseMail;
     }
 
     /**
-     * Permet de retourner le matricule
-     * @return le matricule
+     * @return Permet de retourner le matricule
      */
     public String getMatricule() {
         return matricule;
     }
 
     /**
-     * Permet de changer le matricule
-     * @param matricule
+     * @param matricule Permet de changer le matricule
      */
     public void setMatricule(String matricule) {
         this.matricule = matricule;
     }
 
     /**
-     * Permet de retourner le nom
-     * @return
+     * @return Permet de retourner le nom
      */
     public String getNom() {
         return nom;
     }
 
     /**
-     * permet de changer le nom
-     * @param nom
+     * @param nom permet de changer le nom
      */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
     /**
-     * permet de retourner le prenom
-     * @return
+     * @return permet de retourner le prenom
      */
     public String getPrenom() {
         return prenom;
     }
 
     /**
-     * Permet de changer le prenom
-     * @param prenom
+     * @param prenom Permet de changer le prenom
      */
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
     /**
-     * Permet de retourner le numéro de téléphone
-     * @return
+     * @return Permet de retourner le numéro de téléphone
      */
-    public String getTel() {
-        return tel;
+    public String getNumeroTelephone() {
+        return telephone;
     }
 
     /**
-     * permet de changer le numéro de téléphone
-     * @param tel
+     * @param telephone Permet de changer le numéro de téléphone
      */
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setNumeroTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     /**
-     * permet de retourner l'adresse mail
-     * @return
+     * @return Permet de retourner l'adresse mail
      */
-    public String getMail() {
-        return mail;
+    public String getAdresseMail() {
+        return adresseMail;
     }
 
     /**
-     * Permet de changer l'adresse mail
-     * @param mail
+     * @param adresseMail Permet de changer l'adresse mail
      */
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setAdresseMail(String adresseMail) {
+        this.adresseMail = adresseMail;
     }
 
     /**
-     * Permet de retourner une liste de compétence
-     * @return competenceList
+     * @return competenceList Permet de retourner une liste de compétence
      */
     public List<Competence> getCompetenceList() {
         return competenceList;
     }
 
     /**
-     * Permet de changer une liste de competence
-     * @param competenceList
+     * @param competenceList Permet de changer une liste de competence
      */
     public void setCompetenceList(List<Competence> competenceList) {
         this.competenceList = competenceList;
@@ -171,12 +159,12 @@ public class Employe{
 
 
     /**
-     * methode ajout d'une discipline et un niveau
-     * @param d Ajout une discipline
+     * Methode ajout d'une discipline et un niveau
+     * @param discipline Ajout une discipline
      * @param niveau Ajout d'un niveau
      */
-    public void addDiscipline(Discipline d, int niveau){
-        Competence test = new Competence(niveau,d);
+    public void addDiscipline(Discipline discipline, int niveau){
+        Competence test = new Competence(niveau,discipline);
         competenceList.add(test);
     }
 
@@ -190,27 +178,26 @@ public class Employe{
     }
 
     /**
-     * Modifie le niveau d'une discipline d
-     * @param d
+     * Modifie le niveau d'une discipline
+     * @param discipline
      * @param niveau
      */
-    public void modifDiscipline(Discipline d, int niveau) {
+    public void modifDiscipline(Discipline discipline, int niveau) {
         for (Competence c : competenceList){
-            if(c.getDiscipline().equals(d)){
+            if(c.getDiscipline().equals(discipline)){
                 c.setNiveau(niveau);
                 return;
             }
         }
-        System.out.println("Aucune discipline "+ d.getNom()+" n'a été trouvée");
+        System.out.println("Aucune discipline "+ discipline.getNom()+" n'a été trouvée");
     }
 
     /**
-     * Supprime la discipline d
-     * @param d
+     * @param discipline Supprime la discipline d
      */
-        public void suppDiscipline(Discipline d){
+        public void suppDiscipline(Discipline discipline){
             for (Competence c : competenceList){
-                if(c.getDiscipline().equals(d)){
+                if(c.getDiscipline().equals(discipline)){
                     competenceList.remove(c);
                     return;
                 }

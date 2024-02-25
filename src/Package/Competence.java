@@ -1,7 +1,7 @@
 package Package;
 
 /**
- * classe Competence
+ * Classe Competence
  *
  * @author Kirashigan
  * @version 1.0
@@ -10,34 +10,34 @@ package Package;
 
 public class Competence {
     /**
-     * identifiant unique des compétences
+     * Identifiant unique des compétences
      */
     protected int idCompetence;
     /**
-     * niveau qu'une compétence d'un employé
+     * Niveau qu'une compétence d'un employé
      */
     protected int niveau;
     /**
-     * discipline de l'employé
+     * Discipline de l'employé
      */
-    protected Discipline d;
+    protected Discipline discipline;
 
 
     /**
      * Permet d'ajouter une compétence avec ses parametres
-     * @param idCompetence
-     * @param niveau
-     * @param d <== discipline
+     * @param idCompetence Identifiant de la compétence (Unique)
+     * @param niveau Le niveau requit par la compétence
+     * @param discipline La discipline sur laquelle la compétence repose
      */
-    public Competence(int idCompetence,int niveau, Discipline d) {
+    public Competence(int idCompetence,int niveau, Discipline discipline) {
         this.idCompetence = idCompetence;
         this.niveau = niveau;
-        this.d = d;
+        this.discipline = discipline;
     }
 
-    public Competence(int niveau, Discipline d) {
+    public Competence(int niveau, Discipline discipline) {
         this.niveau = niveau;
-        this.d = d;
+        this.discipline = discipline;
     }
 
     public Competence(int niveau) {
@@ -45,50 +45,44 @@ public class Competence {
     }
 
     /**
-     * Retourne le niveau d'une compétence
-     * @return
+     * @return Retourne le niveau d'une compétence
      */
     public int getNiveau() {
         return niveau;
     }
 
     /**
-     * Permet de changer le niveau d'une compétence
-     * @param niveau
+     * @param niveau Permet de changer le niveau d'une compétence
      */
     public void setNiveau(int niveau) {
         this.niveau = niveau;
     }
 
     /**
-     * Retourne id d'une compétence
-     * @return
+     * @return Retourne id d'une compétence
      */
     public int getIdCompetence() {
         return idCompetence;
     }
 
     /**
-     * Permet de changer l'id d'une compétence
-      * @param idCompetence
+      * @param idCompetence Permet de changer l'id d'une compétence
      */
     public void setIdCompetence(int idCompetence) {
         this.idCompetence = idCompetence;
     }
 
     /**
-     * Retourne une discipline
-     * @return
+     * @return Retourne une discipline
      */
     public Discipline getDiscipline() {
-        return d;
+        return discipline;
     }
 
     /**
-     * permet de changer le discipline
-     * @param d
+     * @param discipline Permet de changer la discipline
      */
-    public void setDiscipline(Discipline d) {
-        this.d = d;
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
     }
 }

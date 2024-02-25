@@ -3,7 +3,7 @@ package Package;
 import java.time.LocalDate;
 import java.util.*;
 /**
- * classe Travail
+ * Classe Travail
  *
  * @author Kirashigan
  * @version 1.0
@@ -16,96 +16,88 @@ public class Travail {
 
     protected int idTravail;
     /**
-     * pourcentage de contribution sur un travail d'un employé
+     * Pourcentage de contribution sur un travail d'un employé
      */
     protected int pourcentage;
     /**
-     * date d'engagement d'un employé sur un travail
+     * Date d'engagement d'un employé sur un travail
      */
     protected Date dateEngag;
     /**
      * Employé sur un travail
      */
-    protected Employe e;
+    protected Employe employe;
 
     /**
      * Permet d'ajouter un travail avec ses parametres
      * @param idTravail unique
-     * @param pourcentage
-     * @param dateEngag
+     * @param pourcentage implication dans le travail
+     * @param dateEngag date d'engagement dans le travail
      */
     public Travail(int idTravail, int pourcentage, Date dateEngag) {
         this.idTravail = idTravail;
         this.pourcentage = pourcentage;
         this.dateEngag = dateEngag;
     }
-    public Travail(Employe e,  int pourcentage, Date dateEngag) {
-        this.e= e;
+    public Travail(Employe employe,  int pourcentage, Date dateEngag) {
+        this.employe= employe;
         this.pourcentage = pourcentage;
         this.dateEngag = dateEngag;
     }
 
     /**
-     * retourne le pourcentage de l'employé sur un travail
-     * @return
+     * @return Retourne le pourcentage de l'employé sur un travail
      */
     public int getPourcentage() {
         return pourcentage;
     }
 
     /**
-     * changer l'implication d'un employé dans un travail
-     * @param pourcentage
+     * @param pourcentage Changer l'implication d'un employé dans un travail
      */
     public void setPourcentage(int pourcentage) {
         this.pourcentage = pourcentage;
     }
 
     /**
-     * retourne la date d'engagment d'un employé sur un travail
-     * @return
+     * @return Retourne la date d'engagment d'un employé sur un travail
      */
     public Date getDateEngag() {
         return dateEngag;
     }
 
     /**
-     * Changer la date d'engagement d'un travailleur
-     * @param dateEngag
+     * @param dateEngag Changer la date d'engagement d'un travailleur
      */
     public void setDateEngag(Date dateEngag) {
         this.dateEngag = dateEngag;
     }
 
     /**
-     * retourne l'identifiant d'un travail
-     * @return
+     * @return Retourne l'identifiant d'un travail
      */
     public int getIdTravail() {
         return idTravail;
     }
 
     /**
-     * Permet de changer l'identifiant d'un travail
-     * @param idTravail
+     * @param idTravail Permet de changer l'identifiant d'un travail
      */
     public void setIdTravail(int idTravail) {
         this.idTravail = idTravail;
     }
 
     /**
-     * Retroune les informations sur un employé
-     * @return
+     * @return Retroune les informations sur un employé
      */
-    public Employe getE() {
-        return e;
+    public Employe getEmploye() {
+        return employe;
     }
 
     /**
-     * Permet de changer les infos sur un employé
-     * @param e
+     * @param employe Permet de changer les infos sur un employé
      */
-    public void setE(Employe e) {
-        this.e = e;
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
     }
 }
