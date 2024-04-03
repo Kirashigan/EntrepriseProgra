@@ -45,6 +45,15 @@ public class Employe{
      */
     protected List<Competence> competenceList = new ArrayList<>();
 
+    public Employe(int idEmploye, String matricule, String nom, String prenom, String telephone, String adresseMail) {
+        this.idEmploye = idEmploye;
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.adresseMail = adresseMail;
+    }
+
     /**
      * Permet d'ajouter un employé avec tous ses parametres
      * identifiant unique et auto incrémenté

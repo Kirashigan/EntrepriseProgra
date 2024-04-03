@@ -52,13 +52,14 @@ public class GestEmploye {
         try(Statement stm = dbConnection.createStatement()) {
             ResultSet rs = stm.executeQuery(query);
             while(rs.next()){
+                //Faire avec Id (créer un constructeur avec Id en plus)
                 int id = rs.getInt(1);
                 String matricule = rs.getString(2);
                 String nom = rs.getString(3);
                 String prenom = rs.getString(4);
                 String tel = rs.getString(5);
                 String email= rs.getString(6);
-                Employe em = new Employe(matricule,nom,prenom,tel,email);
+                Employe em = new Employe(id,matricule,nom,prenom,tel,email);
                 System.out.println("\n"+em+"\n");
             }
 
@@ -162,4 +163,5 @@ public class GestEmploye {
         GestEmploye GEmp = new GestEmploye();
         GEmp.gestion();
     }
+
 }
