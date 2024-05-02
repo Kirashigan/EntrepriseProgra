@@ -1,31 +1,39 @@
 package MVC.controller;
 
-import MVC.model.DAOEmploye;
-import MVC.view.EmployeAbstractVue;
 import Package.Employe;
+import MVC.model.DAOEmploye;
+import MVC.view.EmployeAbstractView;
 
 import java.util.List;
 
 public class EmployeController {
+    private DAOEmploye model;
+    private EmployeAbstractView view;
 
-    private static DAOEmploye model;
-    private EmployeAbstractVue view;
-
-    public EmployeController(DAOEmploye model, EmployeAbstractVue view) {
+    public EmployeController(DAOEmploye model, EmployeAbstractView view) {
         this.model = model;
         this.view = view;
         this.view.setController(this);
     }
 
-    public static List<Employe> getAll(){
-        return model.getEmploye();
+    public List<Employe> getAll(){
+        return model.getEmployes();
     }
-    public static Employe addEmploye(Employe employe){
-        return model.addEmploye(employe);
+    public Employe addEmploye(Employe employe) {
+        return  model.addEmploye(employe);
     }
-    public static boolean removeEmploye(Employe employe){
-        return model.removeEmploye(employe);
+
+    public boolean removeEmploye(Employe emp) {
+        return model.removeEmploye(emp);
     }
-    public static Employe updateEmploye(Employe employe){return model.updateEmploye(employe);}
-    public static Employe search(int idEmploye){return model.readEmploye(idEmploye);}
+
+    public Employe update(Employe employe) {
+        return model.updateEmploye(employe);
+
+    }
+
+    public Employe search(int idEmpl) {
+        return  model.readEmploye(idEmpl);
+    }
+
 }

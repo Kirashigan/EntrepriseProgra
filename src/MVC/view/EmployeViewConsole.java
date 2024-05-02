@@ -1,29 +1,33 @@
 package MVC.view;
 
+import Package.Employe;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import MVC.controller.EmployeController;
-import Package.Employe;
 import static utilitaires.Utilitaire.*;
-import static utilitaires.Utilitaire.choixListe;
 
-public class EmployeViewConsole extends EmployeAbstractVue{
+public class EmployeViewConsole extends EmployeAbstractView {
+
     private Scanner sc = new Scanner(System.in);
 
     @Override
     public void affMsg(String msg) {
-        System.out.println("information:" + msg);
+        System.out.println("Information : " + msg);
+    }
+
+    @Override
+    public void affList(List infos) {
+        affListe(infos);
     }
 
 
-    @Override
     public void menu() {
         update(employeController.getAll());
         do {
+            int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Rechercher", "Modifier", "Fin"));
 
-            int ch = choixListe(Arrays.asList("ajout", "retrait", "rechercher", "modifier", "fin"));
             switch (ch) {
                 case 1:
                     ajouter();
@@ -43,65 +47,58 @@ public class EmployeViewConsole extends EmployeAbstractVue{
         } while (true);
     }
 
-    @Override
-    public void affList(List l) {
-        affListe(l);
-    }
-
-
 
     private void modifier() {
-        int nl = choixElt(employeList) - 1;
-        Employe employe = employeList.get(nl);
-        String nom = modifyIfNotBlank("nom", employe.getNom());
-        String matricule = modifyIfNotBlank("matricule", employe.getMatricule());
-        String prenom = modifyIfNotBlank("prénom", employe.getPrenom());
-        String tel = modifyIfNotBlank("téléphone", employe.getNumeroTelephone());
-        String adressMail = modifyIfNotBlank("Adresse Mail",employe.getAdresseMail());
-        Employe em =EmployeController.updateEmploye(new Employe(employe.getIdEmploye(),matricule, nom, prenom, tel, adressMail));
-        if(em==null) affMsg("mise à jour infructueuse");
-        else affMsg("mise à jour effectuée : "+em);
+        int nl = choixElt(lp);
+
+        Employe emp = lp.get(nl - 1);
+        String matricule = modifyIfNotBlank("Matricule de l'employé : ", emp.getMatricule());
+        String nom = modifyIfNotBlank("Nom : ", emp.getNom());
+        String prenom = modifyIfNotBlank("Prénom : ", emp.getPrenom());
+        String tel = modifyIfNotBlank("Téléphone : ", emp.getNumeroTelephone());
+        String mail = modifyIfNotBlank("Mail : ", emp.getAdresseMail());
+        Employe empmaj = employeController.update(new Employe(emp.getIdEmploye(), matricule, nom, prenom, tel, mail));
+        if (empmaj == null) affMsg("mise à jour infrucueuse");
+        else affMsg("mise à jour effectuée : " + empmaj);
     }
 
     private void rechercher() {
-        System.out.println("idclient : ");
-        int idClient = sc.nextInt();
-        Employe em = EmployeController.search(idClient);
-        if(em==null) affMsg("recherche infructueuse");
-        else {
-            affMsg(em.toString());
-        }
+        System.out.println("idEmploye : ");
+        int idEmploye = sc.nextInt();
+        employeController.search(idEmploye);
     }
 
     private void retirer() {
-        int nl = choixElt(employeList)-1;
-        Employe employe = employeList.get(nl);
-        boolean ok = EmployeController.removeEmploye(employe);
-        if(ok) affMsg("client effacé");
-        else affMsg("client non effacé");
+
+        int nl = choixElt(lp);
+        Employe emp = lp.get(nl - 1);
+        boolean ok = employeController.removeEmploye(emp);
+        if (ok) affMsg("Employé effacé");
+        else affMsg("Employé non effacé");
     }
 
     private void ajouter() {
-        System.out.println("Matricule: ");
+        System.out.print("Matricule de l'employé : ");
         String matricule = sc.nextLine();
-        System.out.print("nom : ");
+        System.out.print("Nom : ");
         String nom = sc.nextLine();
-        System.out.print("prenom: ");
+        System.out.print("Prénom : ");
         String prenom = sc.nextLine();
-        System.out.print("Numéro de téléphone: ");
-        String tel = sc.nextLine();
-        System.out.print("Adresse Mail: ");
+        System.out.print("Téléphone : ");
+        String telephone = sc.nextLine();
+        System.out.print("Mail : ");
         String mail = sc.nextLine();
-        Employe em = EmployeController.addEmploye(new Employe(matricule, nom, prenom, tel, mail));
-        if(em!=null) affMsg("création de : "+em);
+        Employe emp = employeController.addEmploye(new Employe(0, matricule, nom, prenom, telephone, mail));
+        if (emp != null) affMsg("création de :" + emp);
         else affMsg("erreur de création");
     }
 
     @Override
     public Employe selectionner() {
-        update(EmployeController.getAll());
-        int nl = choixListe(employeList);
-        Employe employe = employeList.get(nl - 1);
-        return employe;
+        update(employeController.getAll());
+        int nl = choixListe(lp);
+        Employe emp = lp.get(nl - 1);
+        return emp;
     }
 }
+

@@ -1,19 +1,18 @@
 package MVC.view;
 
+import Package.Employe;
 import MVC.controller.EmployeController;
 import MVC.observer.Observer;
-import Package.Employe;
 import java.util.List;
 
-public abstract class EmployeAbstractVue implements Observer {
+public abstract class EmployeAbstractView implements Observer {
 
-    protected List<Employe> employeList;
     protected EmployeController employeController;
+    protected List<Employe> lp;
 
-    public void  setController(EmployeController EmployeController){
+    public void  setController(EmployeController employeController){
         this.employeController=employeController;
     }
-
     public abstract void affMsg(String msg);
 
     public abstract Employe selectionner();
@@ -23,10 +22,9 @@ public abstract class EmployeAbstractVue implements Observer {
     public abstract void affList(List l);
 
     @Override
-    public void update(List le) {
-        this.employeList = le;
-        affList(le);
+    public void update(List lp) {
+        this.lp = lp;
+        affList(lp);
     }
-
 
 }
