@@ -1,5 +1,4 @@
-package Package;
-
+package designpatterns.builder;
 import java.util.*;
 
 /**
@@ -77,18 +76,18 @@ public class Employe{
      * @param telephone numéro de téléphone de l'employé
      * @param adresseMail adresse mail de l'employé
      */
-    public Employe(String matricule, String nom, String prenom, String telephone, String adresseMail) {
+    public Employe(EmployeBuilder eb) {
         this.idEmploye = idIncrementation++;
-        this.matricule = matricule;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.telephone = telephone;
-        this.adresseMail = adresseMail;
+        this.matricule = eb.matricule;
+        this.nom = eb.nom;
+        this.prenom = eb.prenom;
+        this.telephone = eb.telephone;
+        this.adresseMail = eb.mail;
     }
 
     /**
      *
-      * @return retourne l'identifiant de l'employé
+     * @return retourne l'identifiant de l'employé
      */
     public int getIdEmploye() {
         return idEmploye;
@@ -220,16 +219,16 @@ public class Employe{
     /**
      * @param discipline Supprime la discipline d
      */
-        public void suppDiscipline(Discipline discipline){
-            for (Competence c : competenceList){
-                if(c.getDiscipline().equals(discipline)){
-                    competenceList.remove(c);
-                    return;
-                }
+    public void suppDiscipline(Discipline discipline){
+        for (Competence c : competenceList){
+            if(c.getDiscipline().equals(discipline)){
+                competenceList.remove(c);
+                return;
             }
-            System.out.println("Aucune discipline de ce nom n'a été répertoriée");
-
         }
+        System.out.println("Aucune discipline de ce nom n'a été répertoriée");
+
+    }
     /**
      * Indique si un autre objet est "égal" à celui-ci.
      * La méthode compare cet objet à un autre objet spécifié.
@@ -270,4 +269,47 @@ public class Employe{
     }
 
 
+    public static class EmployeBuilder{
+        protected int idEmploye;
+        protected String matricule;
+        protected String nom;
+        protected String prenom;
+        protected String telephone;
+        protected String mail;
+
+        public EmployeBuilder setIdEmploye(int idEmploye) {
+            this.idEmploye = idEmploye;
+            return this;
+        }
+
+        public EmployeBuilder setMatricule(String matricule) {
+            this.matricule = matricule;
+            return this;
+        }
+
+        public EmployeBuilder setNom(String nom) {
+            this.nom = nom;
+            return this;
+        }
+
+        public EmployeBuilder setPrenom(String prenom) {
+            this.prenom = prenom;
+            return this;
+        }
+
+        public EmployeBuilder setTelephone(String telephone) {
+            this.telephone = telephone;
+            return this;
+        }
+
+        public EmployeBuilder setMail(String mail) {
+            this.mail = mail;
+            return this;
+        }
+
+        public Employe build() throws Exception{
+            if (matricule == null || nom == null || prenom==null) throw new Exception("Merci de rentrer toutes les informations obligatoire pour l'employé");
+            return new Employe(this);
+        }
+    }
 }

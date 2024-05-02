@@ -1,4 +1,5 @@
-package Package;
+package designpatterns.observer;
+
 
 import java.util.*;
 
@@ -11,7 +12,7 @@ import java.util.*;
  */
 
 
-public class Employe{
+public class Employe extends Observer{
     /**
      * Permet d'incrémenter l'identifiant automatiquement
      */
@@ -88,7 +89,7 @@ public class Employe{
 
     /**
      *
-      * @return retourne l'identifiant de l'employé
+     * @return retourne l'identifiant de l'employé
      */
     public int getIdEmploye() {
         return idEmploye;
@@ -220,16 +221,16 @@ public class Employe{
     /**
      * @param discipline Supprime la discipline d
      */
-        public void suppDiscipline(Discipline discipline){
-            for (Competence c : competenceList){
-                if(c.getDiscipline().equals(discipline)){
-                    competenceList.remove(c);
-                    return;
-                }
+    public void suppDiscipline(Discipline discipline){
+        for (Competence c : competenceList){
+            if(c.getDiscipline().equals(discipline)){
+                competenceList.remove(c);
+                return;
             }
-            System.out.println("Aucune discipline de ce nom n'a été répertoriée");
-
         }
+        System.out.println("Aucune discipline de ce nom n'a été répertoriée");
+
+    }
     /**
      * Indique si un autre objet est "égal" à celui-ci.
      * La méthode compare cet objet à un autre objet spécifié.
@@ -269,5 +270,8 @@ public class Employe{
                 "\ncompetenceList: " + competenceList.toString();
     }
 
-
+    @Override
+    public void update(String msg){
+        System.out.println(prenom+" "+nom+"a reçu le message: "+msg);
+    }
 }
