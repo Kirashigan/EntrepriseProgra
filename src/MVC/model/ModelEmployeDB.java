@@ -17,7 +17,6 @@ public class ModelEmployeDB extends DAOEmploye {
         dbConnect = DBConnection.getConnection();
         if (dbConnect == null) {
             System.err.println("erreur de connexion");
-
             System.exit(1);
         }
 
@@ -26,7 +25,7 @@ public class ModelEmployeDB extends DAOEmploye {
     @Override
     public Employe addEmploye(Employe emp) {
         String query1 = "insert into APIEMPLOYE(matricule,nom,prenom,telephone,mail) values(?,?,?,?,?)";
-        String query2 = "select id_empl from APIPRODUIT where matricule= ?";
+        String query2 = "select idemploye from APIEmploye where matricule= ?";
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
              PreparedStatement pstm2 = dbConnect.prepareStatement(query2);
         ) {
@@ -60,7 +59,7 @@ public class ModelEmployeDB extends DAOEmploye {
 
     @Override
     public boolean removeEmploye(Employe emp) {
-        String query = "delete from APIEMPLOYE where id_empl = ?";
+        String query = "delete from APIEMPLOYE where idemploye = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
             pstm.setInt(1, emp.getIdEmploye());
             int n = pstm.executeUpdate();
@@ -77,7 +76,7 @@ public class ModelEmployeDB extends DAOEmploye {
 
     @Override
     public Employe updateEmploye(Employe emp) {
-        String query = "update APIEMPLOYE set matricule =?,nom=?,prenom=?,telephone=?,mail=? where id_empl = ?";
+        String query = "update APIEMPLOYE set matricule =?,nom=?,prenom=?,telephone=?,mail=? where idemploye = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
             pstm.setString(1, emp.getMatricule());
             pstm.setString(2, emp.getNom());
@@ -92,14 +91,13 @@ public class ModelEmployeDB extends DAOEmploye {
 
         } catch (SQLException e) {
             System.err.println("erreur sql :" + e);
-
             return null;
         }
     }
 
     @Override
     public Employe readEmploye(int idEmp) {
-        String query = "select * from APIEMPLOYE where id_empl = ?";
+        String query = "select * from APIEMPLOYE where idemploye = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
             pstm.setInt(1, idEmp);
             ResultSet rs = pstm.executeQuery();
@@ -145,7 +143,6 @@ public class ModelEmployeDB extends DAOEmploye {
             return null;
         }
     }
-
     @Override
     public List getNotification() {
         return getEmployes();

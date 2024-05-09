@@ -22,7 +22,6 @@ public class EmployeViewConsole extends EmployeAbstractView {
         affListe(infos);
     }
 
-
     public void menu() {
         update(employeController.getAll());
         do {
@@ -58,7 +57,7 @@ public class EmployeViewConsole extends EmployeAbstractView {
         String tel = modifyIfNotBlank("Téléphone : ", emp.getNumeroTelephone());
         String mail = modifyIfNotBlank("Mail : ", emp.getAdresseMail());
         Employe empmaj = employeController.update(new Employe(emp.getIdEmploye(), matricule, nom, prenom, tel, mail));
-        if (empmaj == null) affMsg("mise à jour infrucueuse");
+        if (empmaj == null) affMsg("mise à jour infructeuse");
         else affMsg("mise à jour effectuée : " + empmaj);
     }
 

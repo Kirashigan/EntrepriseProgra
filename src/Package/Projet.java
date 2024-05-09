@@ -60,6 +60,22 @@ public class Projet {
         this.cout = cout;
     }
 
+    public Projet(int idPro, String nom, Date datedebut, Date datefin, BigDecimal cout) {
+        this.idProjet=idPro;
+        this.nom=nom;
+        this.dateDebut=datedebut;
+        this.dateFin=datefin;
+        this.cout=cout;
+    }
+
+    public int getIdProjet() {
+        return idProjet;
+    }
+
+    public void setIdProjet(int idProjet) {
+        this.idProjet = idProjet;
+    }
+
     /**
      * @return  Retourne le nom du projet
      */

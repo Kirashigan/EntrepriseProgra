@@ -1,4 +1,4 @@
-package DB;
+package MVC;
 
 import Package.Employe;
 import myconnections.DBConnection;
@@ -166,7 +166,7 @@ public class GestionEmploye {
     }
 
     public static void main(String[] args) {
-        GestEmploye g = new GestEmploye();
+        GestionEmploye g = new GestionEmploye();
         g.gestion();
     }
 }

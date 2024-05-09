@@ -43,11 +43,21 @@ public class Discipline {
         this.description = description;
     }
 
+    public Discipline(int id,String nom,String description){
+        this.idDiscipline=id;
+        this.nom=nom;
+        this.description=description;
+    }
+
     /**
      * @return Retourne l'Identifiant de la discipline
      */
     public int getIdDiscipline() {
         return idDiscipline;
+    }
+
+    public void setIdDiscipline(int idDiscipline) {
+        this.idDiscipline = idDiscipline;
     }
 
     /**
