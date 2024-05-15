@@ -9,6 +9,7 @@ import java.util.PropertyResourceBundle;
 import java.util.Scanner;
 
 public class GestionEmploye {
+    //TODO FAIRE LE MENU POUR POUVOIR UTILISER TT LE MVC
     private Scanner sc = new Scanner(System.in);
     private Connection dbConnect;
 
