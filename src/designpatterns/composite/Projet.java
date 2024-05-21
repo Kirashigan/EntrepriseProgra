@@ -7,28 +7,10 @@ import java.util.*;
  * Classe Projet
  *
  * @author Kirashigan
- * @version 1.0
+ * @version 1.1
  */
-public class Projet {
+public class Projet extends Element{
 
-
-    //todo Les projet appartiennent à des groupes de projet
-    // (id: int, nom: String) et eux-même peuvent comporter des groupes de projets.
-    // Totaliser le coût total.
-
-
-    /**
-     * Permet d'incrémenter l'identifiant automatiquement
-     */
-    protected static int idIncrementation = 1;
-    /**
-     * Identifiant unique d'un projet
-     */
-    protected  int idProjet;
-    /**
-     * Nom du projet
-     */
-    protected String nom;
     /**
      * Date de debut d'un projet
      */
@@ -41,6 +23,21 @@ public class Projet {
      * Coût du projet
      */
     protected BigDecimal cout;
+    protected Set<Element> HashElem = new HashSet<>();
+
+    @Override
+    public BigDecimal coutTotal(){
+        BigDecimal sum = this.cout;
+        for (Element e : HashElem){
+            sum = sum.add(e.coutTotal());
+        }
+        return sum;
+    }
+
+    public Set<Element> getHashElem(){
+        return HashElem;
+    }
+
     /**
      * Discipline de base du projet
      */
@@ -60,26 +57,12 @@ public class Projet {
      * @param cout Cout du projet
      */
     public Projet(String nom, Date dateDebut, Date dateFin, BigDecimal cout) {
-        this.idProjet = idIncrementation++;
-        this.nom = nom;
+        super(nom);
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.cout = cout;
     }
 
-    /**
-     * @return  Retourne le nom du projet
-     */
-    public String getNom() {
-        return nom;
-    }
-
-    /**
-     * @param nom  Change le nom du projet
-     */
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
 
     /**
      * @return  Retourne la date de début du projet
@@ -226,28 +209,6 @@ public class Projet {
         }
         return listeplusqualifie;
     }
-    /**
-     * Indique si un autre objet est "égal" à celui-ci.
-     * La méthode compare cet objet à un autre objet spécifié.
-     *
-     * @param o l'objet à comparer avec cet objet.
-     * @return {@code true} si les objets sont égaux ; {@code false} sinon.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Projet projet = (Projet) o;
-        return idProjet == projet.idProjet;
-    }
-    /**
-     * Retourne un code de hachage pour l'objet.
-     * @return le code de hachage de l'objet.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(idProjet);
-    }
 
     /**
      * Retourne une représentation sous forme de texte de la classe Projet
@@ -256,8 +217,8 @@ public class Projet {
     @Override
     public String toString() {
         return "Projet :" +
-                "\nidProjet : " + idProjet +
-                "\nnom :'" + nom +
+                "\nidProjet : " + getId() +
+                "\nnom :'" + getNom() +
                 "\ndateDebut : " + dateDebut +
                 "\ndateFin : " + dateFin +
                 "\ncout : " + cout +
