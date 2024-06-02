@@ -67,13 +67,11 @@ public class ProjetViewConsole extends ProjetAbstractView{
         }while(true);
     }
     private void implicationTotal(Projet p){
-        boolean ok = projetController.totalPourcentage(p);
-        if(ok) System.out.println(" % du projet a été attribué");
-        else System.out.println("Erreur, % d'implication.");
+        int ok = projetController.totalPourcentage(p);
     }
     private void modifEmp(Projet p){
         System.out.println("Selectionnez un employé: ");
-        affList(travailList);
+        affListe(travailList);
         Travail t = travailList.get(choixListe(travailList)-1);
         System.out.println("Entrez son nouveau pourcentage d'investissement au projet: ");
         int part = sc.nextInt();

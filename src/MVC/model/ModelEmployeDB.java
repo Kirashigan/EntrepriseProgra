@@ -161,7 +161,7 @@ public class ModelEmployeDB extends DAOEmploye {
     }
 
     public boolean supDiscipline(Employe e, Discipline d){
-        String requete = "delete from Apicompetence where iddiscipline = ? and idEmploye = ?";
+        String requete = "delete from APICompetence where iddiscipline = ? and idEmploye = ?";
         try (PreparedStatement p = dbConnect.prepareStatement(requete)){
             p.setInt(1,d.getIdDiscipline());
             p.setInt(2,e.getIdEmploye());

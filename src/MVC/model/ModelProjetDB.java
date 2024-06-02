@@ -140,20 +140,21 @@ public class ModelProjetDB extends DAOProjet {
         }
     }
     @Override
-    public boolean addEmploye(Projet p,Employe e, int pourcent){
-    String requete = "insert into APITRAVAIL(pourcentage, dateengagement,cout,idemploye,idprojet) values (?,CURRENT_DATE,?,?,?)";
-    try (PreparedStatement PS = dbConnect.prepareStatement(requete)){
-        PS.setInt(1,pourcent);
-        PS.setInt(4,e.getIdEmploye());
-        PS.setInt(5,p.getIdProjet());
-        int n = PS.executeUpdate();
-        if(n!=0) return true;
-        else return false;
-    }catch (SQLException err){
-        System.err.println("Erreur sql: "+err);
-        return false;
+    public boolean addEmploye(Projet p, Employe e, int pourcent) {
+        String requete = "INSERT INTO APITRAVAIL(pourcentage, dateengagement, cout, idemploye, idprojet) VALUES (?, CURRENT_DATE, ?, ?, ?)";
+        try (PreparedStatement PS = dbConnect.prepareStatement(requete)) {
+            PS.setInt(1, pourcent);
+            PS.setBigDecimal(2, p.getCout());
+            PS.setInt(3, e.getIdEmploye());
+            PS.setInt(4, p.getIdProjet());
+            int n = PS.executeUpdate();
+            return n != 0;
+        } catch (SQLException err) {
+            System.err.println("Erreur sql: " + err);
+            return false;
+        }
     }
-    }
+
 
     @Override
     public boolean delEmp(Projet p, Employe e){
@@ -172,33 +173,43 @@ public class ModelProjetDB extends DAOProjet {
         }
     }
 
-    public boolean modifEmploye(Projet p, Employe e, int pourcentage){
-        String requete = "Update APITRAVAIL set pourcentage = ? where idprojet = ? and idEmploye = ?";
-        try (PreparedStatement PS = dbConnect.prepareStatement(requete)){
-            PS.setInt(1,pourcentage);
-            PS.setInt(2,p.getIdProjet());
-            PS.setInt(3,e.getIdEmploye());
+    @Override
+    public boolean modifEmploye(Projet p, Employe e, int pourcentage) {
+        String requete = "UPDATE APITRAVAIL SET pourcentage = ? WHERE idprojet = ? AND idEmploye = ?";
+        try (PreparedStatement PS = dbConnect.prepareStatement(requete)) {
+            PS.setInt(1, pourcentage);
+            PS.setInt(2, p.getIdProjet());
+            PS.setInt(3, e.getIdEmploye());
             int n = PS.executeUpdate();
-            if(n!=0) return true;
-            else return false;
-        }catch (SQLException err){
-            System.err.println("Erreur SQL: "+err);
+            if (n != 0) {
+                System.out.println("Modification effectuée avec succès");
+                return true;
+            } else {
+                System.out.println("Aucune modification effectuée");
+                return false;
+            }
+        } catch (SQLException err) {
+            System.err.println("Erreur SQL: " + err);
             return false;
         }
     }
 
-    public boolean totalPourcentage(Projet pro){
-        String requete = "retournetotalprojet(?)";
-                try(PreparedStatement p = dbConnect.prepareStatement(requete)){
-                    p.setInt(1,pro.getIdProjet());
-                    int n = p.executeUpdate();
-                    if(n!=0) return true;
-                    else return false;
-                }catch (SQLException err){
-                    System.err.println("Erreur SQL: "+err);
-                    return false;
-                }
+
+    public int totalPourcentage(Projet pro) {
+        String requete = "{? = call retournetotalprojet(?)}";
+        try (CallableStatement cs = dbConnect.prepareCall(requete)) {
+            cs.registerOutParameter(1, java.sql.Types.INTEGER);
+            cs.setInt(2, pro.getIdProjet());
+            cs.execute();
+            int totalPourcentage = cs.getInt(1);
+            System.out.println("Total pourcentage: " + totalPourcentage);
+            return totalPourcentage;
+        } catch (SQLException err) {
+            System.err.println("Erreur SQL: " + err);
+            return -1;  // or any other value indicating an error
+        }
     }
+
 
     @Override
     public List getNotification() {
