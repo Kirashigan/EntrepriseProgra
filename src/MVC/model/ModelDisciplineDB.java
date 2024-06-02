@@ -20,9 +20,9 @@ public class ModelDisciplineDB extends DAODiscipline {
     @Override
     public Discipline addDiscipline(Discipline discipline) {
         String query1 = "insert into APIDiscipline(nom,description) values (?,?)";
-        String query2 = "select iddiscipline from discipline where nom=?";
+        String query2 = "select iddiscipline from APIdiscipline where nom=?";
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
-             PreparedStatement pstm2 = dbConnect.prepareStatement(query2);) {
+             PreparedStatement pstm2 = dbConnect.prepareStatement(query2)) {
             pstm1.setString(1, discipline.getNom());
             pstm1.setString(2, discipline.getDescription());
             int n = pstm1.executeUpdate();
@@ -32,7 +32,6 @@ public class ModelDisciplineDB extends DAODiscipline {
                 if (rs.next()) {
                     int iddis = rs.getInt(1);
                     discipline.setIdDiscipline(iddis);
-                    notifyObservers();
                     return discipline;
                 } else {
                     System.err.println("Record introuvable");
@@ -66,9 +65,9 @@ public class ModelDisciplineDB extends DAODiscipline {
     }
 
     @Override
-    public List<Discipline> getDiscipline() {
-        List<Discipline> ld = new ArrayList<>();
-        String query = "select * from APidiscipline";
+    public List<Discipline> getDisciplines() {
+        List<Discipline> dl = new ArrayList<>();
+        String query = "select * from APIDISCIPLINE";
         try(Statement s = dbConnect.createStatement()){
             ResultSet r = s.executeQuery(query);
             while(r.next()){
@@ -76,9 +75,9 @@ public class ModelDisciplineDB extends DAODiscipline {
                 String nom = r.getString(2);
                 String description = r.getString(3);
                 Discipline d = new Discipline(idDiscipline,nom,description);
-                ld.add(d);
+                dl.add(d);
             }
-            return ld;
+            return dl;
         }catch (SQLException e){
             System.err.println("Erreur SQL: "+e);
             return null;
@@ -87,10 +86,11 @@ public class ModelDisciplineDB extends DAODiscipline {
 
     @Override
     public Discipline updateDiscipline(Discipline discipline) {
-        String query = "update APIDescipline set nom = ?, description = ? where iddiscipline = ?";
+        String query = "update APIDiscipline set nom = ?, description = ? where iddiscipline = ?";
         try(PreparedStatement p = dbConnect.prepareStatement(query)){
             p.setString(1,discipline.getNom());
             p.setString(2,discipline.getDescription());
+            p.setInt(3,discipline.getIdDiscipline());
             int n = p.executeUpdate();
             notifyObservers();
             if (n != 0) {
@@ -104,7 +104,7 @@ public class ModelDisciplineDB extends DAODiscipline {
 
     @Override
     public boolean removeDiscipline(Discipline discipline) {
-        String query = "delete from APIDiscipline where iddisicpline = ?";
+        String query = "delete from APIDiscipline where iddiscipline = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
             pstm.setInt(1, discipline.getIdDiscipline());
             int n = pstm.executeUpdate();
@@ -119,7 +119,7 @@ public class ModelDisciplineDB extends DAODiscipline {
 
     @Override
     public List getNotification() {
-        return getDiscipline();
+        return getDisciplines();
     }
 
 }

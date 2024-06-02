@@ -2,6 +2,8 @@ package MVC.view;
 import Package.Discipline;
 import MVC.controller.DisciplinesController;
 import MVC.observer.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DisciplineAbstractView implements Observer {
@@ -16,8 +18,8 @@ public abstract class DisciplineAbstractView implements Observer {
     public abstract void affList(List l);
 
     @Override
-    public void update(List ld){
-        this.disciplinesList=ld;
-        affList(ld);
+    public void update(List disciplinesList){
+        this.disciplinesList=disciplinesList;
+        affList(disciplinesList);
     }
 }

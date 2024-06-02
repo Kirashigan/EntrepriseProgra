@@ -26,7 +26,7 @@ public class ModelEmployeDB extends DAOEmploye {
 
     @Override
     public Employe addEmploye(Employe emp) {
-        String query1 = "insert into APIEMPLOYE(matricule,nom,prenom,telephone,mail) values(?,?,?,?,?)";
+        String query1 = "insert into APIEMPLOYE(matricule,nom,prenom,telephone,email) values(?,?,?,?,?)";
         String query2 = "select idemploye from APIEmploye where matricule= ?";
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
              PreparedStatement pstm2 = dbConnect.prepareStatement(query2);
@@ -53,7 +53,7 @@ public class ModelEmployeDB extends DAOEmploye {
             } else return null;
 
         } catch (SQLException e) {
-            //System.err.println("erreur sql :"+e);
+            System.err.println("erreur sql :"+e);
 
             return null;
         }
@@ -78,7 +78,7 @@ public class ModelEmployeDB extends DAOEmploye {
 
     @Override
     public Employe updateEmploye(Employe emp) {
-        String query = "update APIEMPLOYE set matricule =?,nom=?,prenom=?,telephone=?,mail=? where idemploye = ?";
+        String query = "update APIEMPLOYE set matricule =?,nom=?,prenom=?,telephone=?,email=? where idemploye = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
             pstm.setString(1, emp.getMatricule());
             pstm.setString(2, emp.getNom());
@@ -111,7 +111,6 @@ public class ModelEmployeDB extends DAOEmploye {
                 String mail = rs.getString(6);
                 Employe emp = new Employe(idEmp, matricule, nom, prenom, tel, mail);
                 return emp;
-
             } else {
                 return null;
             }

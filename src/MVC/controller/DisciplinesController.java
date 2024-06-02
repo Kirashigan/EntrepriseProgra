@@ -14,9 +14,10 @@ public class DisciplinesController {
         this.model=model;
         this.view=view;
         this.view.setDisciplinesController(this);
+
     }
     public List<Discipline> getAll(){
-        return model.getDiscipline();
+        return model.getDisciplines();
     }
     public Discipline addDiscipline(Discipline discipline){return model.addDiscipline(discipline);}
     public boolean removeDiscipline(Discipline discipline){return model.removeDiscipline(discipline);}

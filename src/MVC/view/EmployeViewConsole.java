@@ -29,7 +29,7 @@ public class EmployeViewConsole extends EmployeAbstractView {
     public void menu() {
         update(employeController.getAll());
         do {
-            int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Rechercher", "Modifier", "Fin"));
+            int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Rechercher", "Modifier", "Plus","Fin"));
 
             switch (ch) {
                 case 1:
@@ -45,19 +45,27 @@ public class EmployeViewConsole extends EmployeAbstractView {
                     modifier();
                     break;
                 case 5:
+                    gererDiscipline();
+                    break;
+                case 6:
                     return;
             }
         } while (true);
     }
 
+    private void gererDiscipline(){
+        Employe e = selectionner();
+        if(e != null)menu2(e);
+        else affMsg("Employé pas trouvé");
+    }
     private void menu2(Employe e){
         do {
-            int ch = choixListe(Arrays.asList("Ajouter une discipline","Modifier une Discipline","Supprimer une Discipline","0: Fin"));
+            int ch = choixListe(Arrays.asList("Ajouter une discipline","Modifier une Discipline","Supprimer une Discipline"," Fin"));
             switch (ch){
                 case 1 -> ajoutDis(e);
                 case 2-> modifDis(e);
                 case 3-> suppDis(e);
-                case 0-> {
+                case 4-> {
                     return;
                 }
                 default -> System.out.println("Choissiez quelque chose qui est dans le menu, merci.");
@@ -95,8 +103,13 @@ public void ajoutDis(Employe e){
     else affMsg("Erreur lors de l'ajout");
 }
     private void modifier() {
+        System.out.println("Entrez le numéro qui précède l'id: ");
+        int i =1;
+        for (Employe e : lp){
+            System.out.println(i+ ") id employe: "+e.getIdEmploye()+" Prenom: "+e.getPrenom());
+            i++;
+        }
         int nl = choixElt(lp);
-
         Employe emp = lp.get(nl - 1);
         String matricule = modifyIfNotBlank("Matricule de l'employé : ", emp.getMatricule());
         String nom = modifyIfNotBlank("Nom : ", emp.getNom());
@@ -109,14 +122,24 @@ public void ajoutDis(Employe e){
     }
 
     private void rechercher() {
+        for (Employe e : lp){
+            System.out.println(e.getIdEmploye()+" "+e.getPrenom());
+        }
         System.out.println("idEmploye : ");
         int idEmploye = sc.nextInt();
-        employeController.search(idEmploye);
+        Employe e = employeController.search(idEmploye);
+        if(e != null) System.out.println("Résultat de la recherche: "+e);
+        else System.out.println("Aucun employé n'a cet id.");
     }
 
     private void retirer() {
-
-        int nl = choixElt(lp);
+        int i=1;
+        System.out.println("Entrez le chiffre devant l'employé que vous voulez supprimer: ");
+        for (Employe e : lp){
+            System.out.println(i+") id: "+e.getIdEmploye()+" Prénom: "+e.getPrenom());
+            i++;
+        }
+        int nl = sc.nextInt();
         Employe emp = lp.get(nl - 1);
         boolean ok = employeController.removeEmploye(emp);
         if (ok) affMsg("Employé effacé");
@@ -134,7 +157,7 @@ public void ajoutDis(Employe e){
         String telephone = sc.nextLine();
         System.out.print("Mail : ");
         String mail = sc.nextLine();
-        Employe emp = employeController.addEmploye(new Employe(0, matricule, nom, prenom, telephone, mail));
+        Employe emp = employeController.addEmploye(new Employe(matricule, nom, prenom, telephone, mail));
         if (emp != null) affMsg("création de :" + emp);
         else affMsg("erreur de création");
     }

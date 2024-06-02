@@ -2,6 +2,7 @@ package MVC.view;
 
 import Package.Discipline;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,34 +16,30 @@ public class DisciplineViewConsole extends DisciplineAbstractView{
         System.out.println("Message : "+msg);
     }
 
-
     @Override
-    public Discipline select() {
-        update(disciplinesController.getAll());
-        int nl = choixListe(disciplinesList);
-        Discipline d = disciplinesList.get(nl-1);
-        return d;
-    }
-
-    @Override
-    public void affList(List l){affList(l);}
+    public void affList(List l){affListe(l);}
 
     public void menu(){
         update(disciplinesController.getAll());
         do {
             int ch = choixListe(Arrays.asList("Ajout Discipline","Suppression Discipline","Recherche Discipline","Modifier Discipline","Fin"));
             switch (ch){
-                case 1: ajouter();
-                case 2: retirer();
-                case 3: rechercher();
-                case 4: modifier();
-                case 5: return;
-                default:return;
+                case 1-> ajouter();
+                case 2-> retirer();
+                case 3-> rechercher();
+                case 4-> modifier();
+                case 5-> {return;}
+                default-> System.out.println("Entrez un chiffre comprit dans le menu =)");
             }
         }while(true);
     }
 
     private void modifier(){
+        int i=1;
+        for (Discipline d : disciplinesList){
+            System.out.println(i+") "+d.getIdDiscipline()+ " "+d.getNom());
+            i++;
+        }
         int m = choixElt(disciplinesList);
         Discipline discipline = disciplinesList.get(m-1);
         String Nom = modifyIfNotBlank("Nom de la discipline: ",discipline.getNom());
@@ -53,11 +50,23 @@ public class DisciplineViewConsole extends DisciplineAbstractView{
     }
 
     private void rechercher(){
+        int i=1;
+        for (Discipline d : disciplinesList){
+            System.out.println(i+") "+d.getIdDiscipline()+ " "+d.getNom());
+            i++;
+        }
         System.out.println("id discipline: ");
         int iddis = sc.nextInt();
-        disciplinesController.search(iddis);
+        Discipline d= disciplinesController.search(iddis-1);
+        System.out.println(d.getIdDiscipline()+"\n"+d.getNom()+"\n"+d.getDescription());
     }
     private void retirer(){
+        int i=1;
+        System.out.println("Entrez le chiffre devant la discipline: ");
+        for (Discipline d:disciplinesList){
+            System.out.println(i+") Discipline id: "+d.getIdDiscipline()+ " "+ d.getNom());
+            i++;
+        }
         int nl = choixElt(disciplinesList);
         Discipline discipline = disciplinesList.get(nl-1);
         boolean ok = disciplinesController.removeDiscipline(discipline);
@@ -71,8 +80,18 @@ public class DisciplineViewConsole extends DisciplineAbstractView{
         System.out.println("Description: ");
         String desc = sc.nextLine();
         Discipline d = disciplinesController.addDiscipline(new Discipline(nom, desc));
-        if (d != null) affMsg("Discipline: "+d);
+
+        if (d != null){
+            affMsg("Discipline: "+d);
+            disciplinesList.add(d);
+        }
         else affMsg("Erreur de la création de la discipline");
     }
-
+    @Override
+    public Discipline select(){
+        update(disciplinesController.getAll());
+        int nl = choixListe(disciplinesList);
+        Discipline dis = disciplinesList.get(nl-1);
+        return dis;
+    }
 }

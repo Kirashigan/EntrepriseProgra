@@ -25,9 +25,9 @@ public class ModelProjetDB extends DAOProjet {
     @Override
     public Projet addProjet(Projet projet) {
         String query1 = "insert into APIProjet(nom, datedebut,datefin, cout,pourcentage, iddiscipline) value(?,?,?,?,?,?)";
-        String query2 = "select idprojet from APIPRojet where nom = ?";
+        String query2 = "select idprojet from APIProjet where nom = ?";
         try (PreparedStatement p1 = dbConnect.prepareStatement(query1);
-             PreparedStatement p2 = dbConnect.prepareStatement(query2);) {
+             PreparedStatement p2 = dbConnect.prepareStatement(query2)) {
             p1.setString(1, projet.getNom());
             java.sql.Date sqldatedebut = new java.sql.Date(projet.getDateDebut().getTime());
             java.sql.Date sqldatefin = new java.sql.Date(projet.getDateFin().getTime());
@@ -113,6 +113,7 @@ public class ModelProjetDB extends DAOProjet {
             p.setDate(2, sqldatedebut);
             p.setDate(3, sqldatefin);
             p.setBigDecimal(4, projet.getCout());
+            p.setInt(5,projet.getIdProjet());
             int n = p.executeUpdate();
             notifyObservers();
             if (n != 0) {

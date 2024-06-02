@@ -8,5 +8,5 @@ public abstract class DAODiscipline extends Subject {
     public abstract boolean removeDiscipline(Discipline discipline);
     public abstract Discipline updateDiscipline(Discipline discipline);
     public abstract Discipline readDiscipline(int idDiscipline);
-    public abstract List<Discipline> getDiscipline();
+    public abstract List<Discipline> getDisciplines();
 }

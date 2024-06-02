@@ -27,7 +27,7 @@ public class ProjetViewConsole extends ProjetAbstractView{
     public void menu() {
         update(projetController.getAll());
         do {
-            int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Rechercher", "Modifier", "Fin"));
+            int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Rechercher", "Modifier","Plus", "Fin"));
 
             switch (ch) {
                 case 1:
@@ -43,6 +43,9 @@ public class ProjetViewConsole extends ProjetAbstractView{
                     modifier();
                     break;
                 case 5:
+                    gererEmployes();
+                    break;
+                case 6:
                     return;
             }
         } while (true);
@@ -50,13 +53,13 @@ public class ProjetViewConsole extends ProjetAbstractView{
 
     private void menu2(Projet p){
         do {
-            int ch = choixListe(Arrays.asList("1: Ajouter un employé au projet","2: Supprimer un employé au projet","3: modifier un Employe au projet", "4: Implication total sur le projet","0: Fin"));
+            int ch = choixListe(Arrays.asList("Ajouter un employé au projet","Supprimer un employé au projet","Modifier un Employe au projet", "Implication total sur le projet","Fin"));
             switch (ch){
                 case 1 ->ajoutEmploye(p);
                 case 2-> suppEmp(p);
                 case 3 -> modifEmp(p);
                 case 4->implicationTotal(p);
-                case 0 -> {
+                case 5 -> {
                     return;
                 }
                 default -> System.out.println("Choix invalide, Merci d'entrer un chiffre comprit dans la liste.");
@@ -99,22 +102,60 @@ public class ProjetViewConsole extends ProjetAbstractView{
 
         Projet proj = projetList.get(nl - 1);
         String nom = modifyIfNotBlank("Nom: ", proj.getNom());
-        Date debut = new Date(modifyIfNotBlank("Date début de projet: ",proj.getDateDebut().toString()));
-        Date fin = new Date(modifyIfNotBlank("Date fin de projet: ",proj.getDateFin().toString()));
-        BigDecimal cout = new BigDecimal( modifyIfNotBlank("Cout: ",proj.getCout().toString()));
+
+        String debutStr = modifyIfNotBlank("Date début de projet (yyyy-MM-dd): ", proj.getDateDebut().toString());
+        Date debut = null;
+        try {
+            debut = debutStr.isEmpty() ? proj.getDateDebut() : java.sql.Date.valueOf(debutStr);
+        } catch (IllegalArgumentException e) {
+            affMsg("Format de date invalide pour la date de début.");
+            return;
+        }
+
+        String finStr = modifyIfNotBlank("Date fin de projet (yyyy-MM-dd): ", proj.getDateFin().toString());
+        Date fin = null;
+        try {
+            fin = finStr.isEmpty() ? proj.getDateFin() : java.sql.Date.valueOf(finStr);
+        } catch (IllegalArgumentException e) {
+            affMsg("Format de date invalide pour la date de fin.");
+            return;
+        }
+
+        String coutStr = modifyIfNotBlank("Cout: ", proj.getCout().toString());
+        BigDecimal cout = null;
+        try {
+            cout = coutStr.isEmpty() ? proj.getCout() : new BigDecimal(coutStr);
+        } catch (NumberFormatException e) {
+            affMsg("Format de coût invalide.");
+            return;
+        }
+
         Projet empmaj = projetController.update(new Projet(proj.getIdProjet(), nom, debut, fin, cout));
         if (empmaj == null) affMsg("mise à jour infructeuse");
         else affMsg("mise à jour effectuée : " + empmaj);
     }
 
+
     private void rechercher() {
+        int i = 1;
+        System.out.println("Entrez le chiffre devant l'id du projet: ");
+        for(Projet p : projetList){
+            System.out.println(i+") "+p.getIdProjet()+" "+p.getNom());
+            i++;
+        }
         System.out.println("id Projet : ");
         int idProjet = sc.nextInt();
-        projetController.search(idProjet);
+        Projet p =projetController.search(idProjet);
+        System.out.println(p.getIdProjet()+"\n"+p.getNom()+"\n"+p.getCout());
     }
 
     private void retirer() {
-
+        int i = 1;
+        System.out.println("Entrez le chiffre devant l'id du projet: ");
+        for(Projet p : projetList){
+            System.out.println(i+") "+p.getIdProjet()+" "+p.getNom());
+            i++;
+        }
         int nl = choixElt(projetList);
         Projet proj = projetList.get(nl - 1);
         boolean ok = projetController.removeProjet(proj);
@@ -135,7 +176,11 @@ public class ProjetViewConsole extends ProjetAbstractView{
         if(proj != null) affMsg("creation du projet :"+proj);
         else affMsg("Erreur de création");
     }
-
+private void gererEmployes(){
+        Projet proj = select();
+        if(proj!=null) menu2(proj);
+        else affMsg("Projet non trouvé");
+}
     @Override
     public Projet select() {
         update(projetController.getAll());
