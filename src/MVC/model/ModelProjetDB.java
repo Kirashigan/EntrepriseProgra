@@ -3,7 +3,9 @@ package MVC.model;
 import myconnections.DBConnection;
 import Package.Projet;
 
-import javax.swing.*;
+import Package.Employe;
+import oracle.jdbc.proxy.annotation.Pre;
+
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
@@ -135,6 +137,66 @@ public class ModelProjetDB extends DAOProjet {
             System.err.println("Erreur : " + e);
             return false;
         }
+    }
+    @Override
+    public boolean addEmploye(Projet p,Employe e, int pourcent){
+    String requete = "insert into APITRAVAIL(pourcentage, dateengagement,cout,idemploye,idprojet) values (?,CURRENT_DATE,?,?,?)";
+    try (PreparedStatement PS = dbConnect.prepareStatement(requete)){
+        PS.setInt(1,pourcent);
+        PS.setInt(4,e.getIdEmploye());
+        PS.setInt(5,p.getIdProjet());
+        int n = PS.executeUpdate();
+        if(n!=0) return true;
+        else return false;
+    }catch (SQLException err){
+        System.err.println("Erreur sql: "+err);
+        return false;
+    }
+    }
+
+    @Override
+    public boolean delEmp(Projet p, Employe e){
+        String requete = "delete from APITravail where IDprojet = ? and idemploye=?";
+        try(PreparedStatement PS = dbConnect.prepareStatement(requete)){
+            PS.setInt(1,p.getIdProjet());
+            PS.setInt(2,e.getIdEmploye());
+            int n = PS.executeUpdate();
+            if(n!= 0) {
+                System.out.println("Retrait avec succes");
+                return true;
+            }else return false;
+        }catch (SQLException err){
+            System.err.println("Erreur sql: "+err);
+            return false;
+        }
+    }
+
+    public boolean modifEmploye(Projet p, Employe e, int pourcentage){
+        String requete = "Update APITRAVAIL set pourcentage = ? where idprojet = ? and idEmploye = ?";
+        try (PreparedStatement PS = dbConnect.prepareStatement(requete)){
+            PS.setInt(1,pourcentage);
+            PS.setInt(2,p.getIdProjet());
+            PS.setInt(3,e.getIdEmploye());
+            int n = PS.executeUpdate();
+            if(n!=0) return true;
+            else return false;
+        }catch (SQLException err){
+            System.err.println("Erreur SQL: "+err);
+            return false;
+        }
+    }
+
+    public boolean totalPourcentage(Projet pro){
+        String requete = "retournetotalprojet(?)";
+                try(PreparedStatement p = dbConnect.prepareStatement(requete)){
+                    p.setInt(1,pro.getIdProjet());
+                    int n = p.executeUpdate();
+                    if(n!=0) return true;
+                    else return false;
+                }catch (SQLException err){
+                    System.err.println("Erreur SQL: "+err);
+                    return false;
+                }
     }
 
     @Override

@@ -2,7 +2,9 @@ package MVC.model;
 
 
 import Package.Employe;
+import Package.Discipline;
 import myconnections.DBConnection;
+import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -143,6 +145,50 @@ public class ModelEmployeDB extends DAOEmploye {
             return null;
         }
     }
+
+    public boolean addDiscipline(Employe e, Discipline d, int n){
+        String requete = "insert into APICompetence(niveau,iddiscipline, idemploye) values (?,?,?)";
+        try(PreparedStatement p = dbConnect.prepareStatement(requete)){
+            p.setInt(1,n);
+            p.setInt(2,d.getIdDiscipline());
+            p.setInt(3,e.getIdEmploye());
+            int ni = p.executeUpdate();
+            if(ni!=0) return true;
+            else return false;
+        }catch (SQLException err){
+            System.err.println("Erreur SQL: "+err);
+            return false;
+        }
+    }
+
+    public boolean supDiscipline(Employe e, Discipline d){
+        String requete = "delete from Apicompetence where iddiscipline = ? and idEmploye = ?";
+        try (PreparedStatement p = dbConnect.prepareStatement(requete)){
+            p.setInt(1,d.getIdDiscipline());
+            p.setInt(2,e.getIdEmploye());
+            int n = p.executeUpdate();
+            if(n!=0)return true;
+            else return false;
+        }catch (SQLException er){
+            System.out.println("Erreur sql: "+er);
+            return false;
+        }
+    }
+    public boolean updateDiscipline(Employe e, Discipline d, int niv){
+        String requete = "Update APICOmpetence set niveau = ? where idEmploye = ? and iddiscipline = ?";
+        try (PreparedStatement p = dbConnect.prepareStatement(requete)){
+            p.setInt(1, niv);
+            p.setInt(2,e.getIdEmploye());
+            p.setInt(3,d.getIdDiscipline());
+            int n = p.executeUpdate();
+            if(n!= 0) return true;
+            else return false;
+        }catch  (SQLException err){
+            System.err.println("Erreur SQL: "+err);
+            return false;
+        }
+    }
+
     @Override
     public List getNotification() {
         return getEmployes();

@@ -1,6 +1,10 @@
 package MVC.view;
 
+import MVC.controller.DisciplinesController;
+import MVC.controller.EmployeController;
 import Package.Employe;
+import Package.Discipline;
+import Package.Competence;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +50,50 @@ public class EmployeViewConsole extends EmployeAbstractView {
         } while (true);
     }
 
+    private void menu2(Employe e){
+        do {
+            int ch = choixListe(Arrays.asList("Ajouter une discipline","Modifier une Discipline","Supprimer une Discipline","0: Fin"));
+            switch (ch){
+                case 1 -> ajoutDis(e);
+                case 2-> modifDis(e);
+                case 3-> suppDis(e);
+                case 0-> {
+                    return;
+                }
+                default -> System.out.println("Choissiez quelque chose qui est dans le menu, merci.");
 
+            }
+        }while(true);
+    }
+    public void modifDis(Employe e){
+        System.out.println("Modif d'une competence: ");
+        affList(competenceList);
+        Competence c = competenceList.get(choixElt(competenceList)-1);
+        Discipline d = c.getDiscipline();
+        System.out.println("Niveau: ");
+        int niv = sc.nextInt();
+        boolean ok = employeController.updateDiscipline(e,d,niv);
+        if(ok) affMsg("Mise à jour effectuée");
+        else affMsg("Probleme lors de la MAJ");
+    }
+    public void suppDis(Employe e){
+        System.out.println("Suppression d'une competence: ");
+        affList(competenceList);
+        Competence c = competenceList.get(choixListe(competenceList)-1);
+        Discipline dis = c.getDiscipline();
+        boolean ok = employeController.supDiscipline(e,dis);
+        if(ok) affMsg("Competence supprimée");
+        else affMsg("Probleme lors de la suppression");
+    }
+public void ajoutDis(Employe e){
+    System.out.println("Ajout d'une discipline: ");
+    Discipline dis = dav.select();
+    System.out.println("Entrez le niveau de le discipline: ");
+    int niv = sc.nextInt();
+    boolean ok = employeController.addDiscipline(e, dis,niv);
+    if(ok) affMsg("Discipline ajoutée avec success");
+    else affMsg("Erreur lors de l'ajout");
+}
     private void modifier() {
         int nl = choixElt(lp);
 

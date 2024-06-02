@@ -1,6 +1,8 @@
 package MVC.controller;
 
 import Package.Employe;
+import Package.Discipline;
+import Package.Competence;
 import MVC.model.DAOEmploye;
 import MVC.view.EmployeAbstractView;
 
@@ -9,6 +11,7 @@ import java.util.List;
 public class EmployeController {
     private DAOEmploye model;
     private EmployeAbstractView view;
+
 
     public EmployeController(DAOEmploye model, EmployeAbstractView view) {
         this.model = model;
@@ -36,10 +39,8 @@ public class EmployeController {
         return  model.readEmploye(idEmpl);
     }
 
-    //j'ai pas la méthode :
-    //    public boolean addDiscipline(Employe emp, Discipline dis,int niveau){return model.addDiscipline(emp,dis,niveau);}
-    //    public boolean updateDiscipline(Employe emp, Discipline dis,int niveau){return model.updateDiscipline(emp,dis,niveau);}
-    //    public boolean supDiscipline(Employe emp,Discipline dis){return model.removeDiscipline(emp,dis);}
-    //    public List<Competence> getCompetences(Employe emp){return model.getDisciplines(emp);}
+    public boolean addDiscipline(Employe emp, Discipline dis,int niveau){return model.addDiscipline(emp,dis,niveau);}
+    public boolean updateDiscipline(Employe emp, Discipline dis,int niveau){return model.updateDiscipline(emp,dis,niveau);}
+    public boolean supDiscipline(Employe emp,Discipline dis){return model.supDiscipline(emp,dis);}
 
 }

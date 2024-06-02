@@ -24,4 +24,5 @@ public class DisciplinesController {
         return model.updateDiscipline(discipline);
     }
     public Discipline search(int idDis){return model.readDiscipline(idDis);}
+
 }
